@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
-
-// ─── Section Data ─────────────────────────────────────────────────────────────
-// Each section carries its own accent so the page reads as a considered
-// palette (steel blue → copper → teal → indigo) rather than one repeated hue.
+import { useEffect, useRef, useCallback, useState } from "react";
+// Installed via: npx shadcn@latest add @react-bits/Ballpit-JS-CSS
+// Adjust this import path if your CLI resolved it somewhere else.
+import { Ballpit } from "@/components/Ballpit";
 
 const sections = [
   {
@@ -13,19 +12,21 @@ const sections = [
     heading: "Built on a single question",
     body: "We started in a rented studio with mismatched chairs and one shared monitor. The question on the whiteboard that day — 'what would this look like if it actually worked?' — never left. That question still drives every project we take on.",
     textSide: "left",
-    accent: "#2f6fed",       // steel blue
+    accent: "#2f6fed",
     accentDeep: "#173a8a",
-    tint: "#eef3fc",
+    tint: "#00c4b5",
+    colors: [0xffffff, 0xb3e5fc, 0x0288d1], // keeping – working
   },
-  {
+{
     id: 2,
     label: "Our Craft",
     heading: "Precision at the boundary of possibility",
     body: "Every system we build is the result of obsessive refinement. We don't ship until the interaction feels inevitable — until the gap between intention and outcome collapses. This is what craft means to us: not polish for its own sake, but clarity for the people who matter.",
     textSide: "right",
-    accent: "#c1752f",       // copper / industrial amber
+    accent: "#c1752f",
     accentDeep: "#7a441a",
-    tint: "#faf1e6",
+    tint: "#0284c7",          // keep your current light navy
+    colors: [0xfff5e6, 0xf0c27a, 0xb87333],
   },
   {
     id: 3,
@@ -33,9 +34,10 @@ const sections = [
     heading: "Diverse minds, singular focus",
     body: "We hire for curiosity first. Our team spans disciplines — engineers who sketch, designers who ship, researchers who argue. What holds us together is a shared intolerance for the good-enough and a belief that the best ideas arrive at the intersection of unlike things.",
     textSide: "left",
-    accent: "#1f9d83",       // teal / lab green
+    accent: "#1f9d83",
     accentDeep: "#0d4238",
-    tint: "#eaf6f2",
+    tint: "#ff7a59",          // keep your current baby pink / light red
+    colors: [0xffffff, 0xffc1b3, 0xd4503c],
   },
   {
     id: 4,
@@ -43,146 +45,24 @@ const sections = [
     heading: "Toward something we haven't named yet",
     body: "We're not optimizing toward a roadmap; we're moving toward a feeling. The work ahead is harder, stranger, and more consequential than anything we've done. We're building the team and the tools to meet it — and we're looking for people who find that prospect exciting rather than frightening.",
     textSide: "right",
-    accent: "#6c5ce7",       // indigo
+    accent: "#6c5ce7",
     accentDeep: "#2f2470",
     tint: "#f1eefc",
+    colors: [0x6c5ce7, 0x9d8ff2, 0x2f2470], // keeping – working
   },
 ];
 
-// ─── Three.js Hook ────────────────────────────────────────────────────────────
-// colorTargetRef lets the parent tell the scene which section's accent to
-// drift toward, so the object's color changes as you scroll between sections.
 
-function useGlobalThree(canvasRef, colorTargetRef) {
-  useEffect(() => {
-    let animId;
-
-    const init = async () => {
-      const THREE = (await import("three")).default ?? (await import("three"));
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setClearColor(0x000000, 0);
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-      camera.position.z = 5.2;
-
-      const knot = new THREE.Mesh(
-        new THREE.TorusKnotGeometry(0.95, 0.30, 160, 24, 2, 3),
-        new THREE.MeshStandardMaterial({
-          color: 0x2f6fed,
-          emissive: 0x173a8a,
-          metalness: 0.85,
-          roughness: 0.1,
-        })
-      );
-      scene.add(knot);
-
-      const ring1 = new THREE.Mesh(
-        new THREE.TorusGeometry(2.0, 0.022, 8, 120),
-        new THREE.MeshBasicMaterial({ color: 0x6c5ce7, transparent: true, opacity: 0.5 })
-      );
-      ring1.rotation.x = Math.PI / 3;
-      scene.add(ring1);
-
-      const ring2 = new THREE.Mesh(
-        new THREE.TorusGeometry(2.5, 0.013, 8, 120),
-        new THREE.MeshBasicMaterial({ color: 0x1f9d83, transparent: true, opacity: 0.28 })
-      );
-      ring2.rotation.x = -Math.PI / 5;
-      ring2.rotation.z = Math.PI / 6;
-      scene.add(ring2);
-
-      const pCount = 500;
-      const pPos = new Float32Array(pCount * 3);
-      const pCol = new Float32Array(pCount * 3);
-      for (let i = 0; i < pCount; i++) {
-        const theta = Math.random() * Math.PI * 2;
-        const phi   = Math.acos(2 * Math.random() - 1);
-        const r     = 1.8 + Math.random() * 1.5;
-        pPos[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
-        pPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-        pPos[i * 3 + 2] = r * Math.cos(phi);
-        // particles cycle across the whole palette's hue range, not just blue
-        const c = new THREE.Color().setHSL(Math.random(), 0.55, 0.62);
-        pCol[i * 3] = c.r; pCol[i * 3 + 1] = c.g; pCol[i * 3 + 2] = c.b;
-      }
-      const pGeo = new THREE.BufferGeometry();
-      pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
-      pGeo.setAttribute("color",    new THREE.BufferAttribute(pCol, 3));
-      const particles = new THREE.Points(
-        pGeo,
-        new THREE.PointsMaterial({ size: 0.035, vertexColors: true, transparent: true, opacity: 0.7 })
-      );
-      scene.add(particles);
-
-      const light1 = new THREE.PointLight(0x2f6fed, 7, 14);
-      light1.position.set(3, 2, 3);
-      scene.add(light1);
-
-      const light2 = new THREE.PointLight(0x6c5ce7, 4, 10);
-      light2.position.set(-3, -2, 2);
-      scene.add(light2);
-
-      scene.add(new THREE.AmbientLight(0x8eaaff, 1.0));
-
-      const tmpColor = new THREE.Color();
-      const tmpEmissive = new THREE.Color();
-
-      let tick = 0;
-      const animate = () => {
-        animId = requestAnimationFrame(animate);
-        tick += 0.006;
-        knot.rotation.x += 0.004;
-        knot.rotation.y += 0.007;
-        ring1.rotation.y += 0.003;
-        ring2.rotation.x += 0.002;
-        particles.rotation.y += 0.001;
-        light1.position.x = Math.sin(tick) * 3;
-        light1.position.y = Math.cos(tick * 0.7) * 2;
-
-        // Smoothly drift the knot + key light toward the active section's accent
-        const target = colorTargetRef.current;
-        if (target) {
-          tmpColor.set(target.accent);
-          tmpEmissive.set(target.accentDeep);
-          knot.material.color.lerp(tmpColor, 0.04);
-          knot.material.emissive.lerp(tmpEmissive, 0.04);
-          light1.color.lerp(tmpColor, 0.04);
-        }
-
-        const w = canvas.clientWidth;
-        const h = canvas.clientHeight;
-        if (canvas.width !== w || canvas.height !== h) {
-          renderer.setSize(w, h, false);
-          camera.aspect = w / h;
-          camera.updateProjectionMatrix();
-        }
-        renderer.render(scene, camera);
-      };
-      animate();
-    };
-
-    init();
-    return () => { if (animId) cancelAnimationFrame(animId); };
-  }, [colorTargetRef]);
-}
-
-// ─── Floating Canvas ──────────────────────────────────────────────────────────
-
-function FloatingCanvas({ slotRefs }) {
-  const canvasRef = useRef(null);
-  const colorTargetRef = useRef({ accent: "#2f6fed", accentDeep: "#173a8a" });
-  useGlobalThree(canvasRef, colorTargetRef);
+function FloatingBallpit({ slotRefs }) {
+  const wrapRef  = useRef(null);
   const posRef   = useRef({ x: 0, y: 0, w: 0, h: 0 });
   const frameRef = useRef(null);
+  const [colors, setColors] = useState(sections[0].colors);
+  const activeIndexRef = useRef(0);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const wrap = wrapRef.current;
+    if (!wrap) return;
 
     const OVERSIZE = 1.4;
 
@@ -194,10 +74,10 @@ function FloatingCanvas({ slotRefs }) {
       const x = r.left - (w - r.width) / 2;
       const y = r.top  - (h - r.height) / 2;
       posRef.current = { x, y, w, h };
-      canvas.style.left   = `${x}px`;
-      canvas.style.top    = `${y}px`;
-      canvas.style.width  = `${w}px`;
-      canvas.style.height = `${h}px`;
+      wrap.style.left   = `${x}px`;
+      wrap.style.top    = `${y}px`;
+      wrap.style.width  = `${w}px`;
+      wrap.style.height = `${h}px`;
     }
 
     const update = () => {
@@ -233,19 +113,17 @@ function FloatingCanvas({ slotRefs }) {
         const opacity = Math.max(0, 1 - dist / (vh * 0.75));
 
         posRef.current = { x: nx, y: ny, w: nw, h: nh };
-        canvas.style.left    = `${nx}px`;
-        canvas.style.top     = `${ny}px`;
-        canvas.style.width   = `${nw}px`;
-        canvas.style.height  = `${nh}px`;
-        canvas.style.opacity = opacity;
+        wrap.style.left    = `${nx}px`;
+        wrap.style.top     = `${ny}px`;
+        wrap.style.width   = `${nw}px`;
+        wrap.style.height  = `${nh}px`;
+        wrap.style.opacity = opacity;
 
-        // Hand the nearest-to-center section's palette to the 3D scene
-        const activeSection = sections[bestIndex];
-        if (activeSection) {
-          colorTargetRef.current = {
-            accent: activeSection.accent,
-            accentDeep: activeSection.accentDeep,
-          };
+        // Only push a new `colors` prop when the active section actually
+        // changes, so Ballpit isn't re-rendered every frame.
+        if (bestIndex !== activeIndexRef.current) {
+          activeIndexRef.current = bestIndex;
+          setColors(sections[bestIndex].colors);
         }
       }
 
@@ -257,8 +135,8 @@ function FloatingCanvas({ slotRefs }) {
   }, [slotRefs]);
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
+      ref={wrapRef}
       style={{
         position:      "fixed",
         top:           0,
@@ -268,49 +146,21 @@ function FloatingCanvas({ slotRefs }) {
         pointerEvents: "none",
         zIndex:        10,
         opacity:       0,
-        background:    "transparent",
       }}
-    />
-  );
-}
-
-// ─── About Hero ───────────────────────────────────────────────────────────────
-
-function AboutHero() {
-  return (
-    <div className="bg-[#f4f1ea] border-b border-black/[0.06] py-24 px-6 text-center">
-      <p className="text-[#2f6fed] text-xs font-semibold tracking-[0.22em] uppercase mb-5">
-        Who we are
-      </p>
-
-<h2 
-  className="font-bold leading-none tracking-tight mb-6 mx-auto" 
-  style={{ 
-    fontFamily: "'Playfair Display', Georgia, serif", 
-    fontSize: "clamp(3rem, 8vw, 6rem)", 
-    // Rich gold and black gradient for a premium look
-    background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #000000 100%)", 
-    WebkitBackgroundClip: "text", 
-    WebkitTextFillColor: "transparent", 
-    backgroundClip: "text", 
-    maxWidth: "20ch", 
-  }} 
-> 
-  About Us 
-</h2>
-
-      <p
-        className="text-[#5a6478] font-light leading-relaxed mx-auto max-w-md"
-        style={{ fontSize: "clamp(1rem, 2vw, 1.1rem)" }}
-      >
-        A studio that builds at the edge of what's possible —<br />
-        and finds that the edge keeps moving.
-      </p>
+    >
+     <Ballpit
+  className="w-full h-full"
+  count={90}
+  gravity={0}                 // ← key change: no settling
+  friction={0.9975}
+  wallBounce={0.99}       
+  followCursor={false}
+  colors={colors}
+/>
     </div>
   );
 }
 
-// ─── Section ──────────────────────────────────────────────────────────────────
 
 function AboutSection({ section, slotRef }) {
   const textRef = useRef(null);
@@ -337,12 +187,10 @@ function AboutSection({ section, slotRef }) {
     return () => observer.disconnect();
   }, [isLeft]);
 
-  // Background tint now follows each section's own accent family instead of
-  // a flat cream/beige alternation, so the color shift reads as intentional.
   const bgColor = section.tint;
 
   const textBlock = (
-    <div ref={textRef} className="flex flex-col gap-5 max-w-md">
+    <div ref={textRef} className="flex flex-col gap-5 max-w-md ml-8">
       <span className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: section.accentDeep }}>
         <span
           className="inline-block h-1.5 w-1.5 rounded-full"
@@ -413,9 +261,8 @@ export default function About() {
   }, []);
 
   return (
-    <div className="bg-[#f4f1ea]" id="about">
-      <FloatingCanvas slotRefs={slotRefs} />
-      <AboutHero />
+    <div className="bg-[#00c4b5]" id="about">
+      <FloatingBallpit slotRefs={slotRefs} />
       {sections.map((section, i) => (
         <AboutSection
           key={section.id}

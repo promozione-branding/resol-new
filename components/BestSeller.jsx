@@ -41,7 +41,6 @@ const products = [
     category: "Additive",
     description:
       "Heat and light stabilizers that extend the working life of PVC compounds.",
-    // placeholder image — swap in a dedicated product photo
     image:
       "https://www.resolindustries.com/wp-content/uploads/2026/01/Plasticizers-1.jpg",
   },
@@ -50,15 +49,11 @@ const products = [
     category: "Resin",
     description:
       "Fine emulsion-grade resin suited to coatings, adhesives, and textile finishing.",
-    // placeholder image — swap in a dedicated product photo
     image:
       "https://www.resolindustries.com/wp-content/uploads/2026/01/Melamine-3.jpg",
   },
 ];
 
-// Shortest signed distance from `index` to `current` on a circular track of
-// length `total` — this is what lets the deck loop endlessly in both
-// directions instead of snapping back at the ends.
 function circularOffset(index, current, total) {
   let diff = index - current;
   if (diff > total / 2) diff -= total;
@@ -71,24 +66,23 @@ function Card({ product, offset, onFocus }) {
   const isCenter = offset === 0;
   const hidden = distance > 2;
 
-  // Straight stack: cards shift sideways and shrink with distance, but
-  // never tilt or rotate.
-  const translateX = offset * 232;
-  const translateY = isCenter ? 0 : distance === 1 ? 16 : 30;
-  const scale = isCenter ? 1 : distance === 1 ? 0.86 : 0.72;
-  const opacity = hidden ? 0 : isCenter ? 1 : distance === 1 ? 0.9 : 0.55;
+  const CARD_WIDTH = 240;
+  const GAP = 5;
+  const translateX = offset * (CARD_WIDTH + GAP);
+
+  const opacity = hidden ? 0 : isCenter ? 1 : 0.92;
   const zIndex = 20 - distance;
 
   return (
     <div
-      className="absolute left-1/2 top-0 w-80 select-none"
+      className="absolute left-1/2 top-0 w-60 select-none"
       style={{
-        transform: `translateX(-50%) translateX(${translateX}px) translateY(${translateY}px) scale(${scale})`,
+        transform: `translateX(-50%) translateX(${translateX}px)`,
         opacity,
         zIndex,
         pointerEvents: hidden ? "none" : "auto",
         transition:
-          "transform 550ms cubic-bezier(0.22, 1, 0.36, 1), opacity 550ms ease, z-index 0s",
+          "transform 550ms cubic-bezier(0.22, 1, 0.36, 1), opacity 550ms ease",
       }}
     >
       <div
@@ -117,7 +111,7 @@ function Card({ product, offset, onFocus }) {
           }}
         />
 
-        <div className="relative h-52 w-full overflow-hidden">
+        <div className="relative h-44 w-full overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
@@ -127,18 +121,18 @@ function Card({ product, offset, onFocus }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10" />
         </div>
 
-        <div className="relative flex flex-1 flex-col gap-2 px-6 py-5">
+        <div className="relative flex flex-1 flex-col gap-1.5 px-5 py-4">
           <span className="text-[11px] tracking-wide text-[#C79A5C]">
             {product.category}
           </span>
-          <h3 className="text-xl font-semibold leading-snug text-white">
+          <h3 className="text-lg font-semibold leading-snug text-white">
             {product.name}
           </h3>
-          <p className="text-sm leading-relaxed text-white/70">
+          <p className="text-sm leading-relaxed text-white/70 line-clamp-3">
             {product.description}
           </p>
           <button
-            className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full border border-white/30 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:border-[#C79A5C] hover:text-[#C79A5C]"
+            className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full border border-white/30 px-3.5 py-1.5 text-sm font-medium text-white transition-colors hover:border-[#C79A5C] hover:text-[#C79A5C]"
             tabIndex={isCenter ? 0 : -1}
           >
             Read more
@@ -161,7 +155,6 @@ export default function ProductCoverflow() {
   const next = useCallback(() => goTo(current + 1), [current, goTo]);
   const prev = useCallback(() => goTo(current - 1), [current, goTo]);
 
-  // keyboard support
   const containerRef = useRef(null);
   useEffect(() => {
     const handler = (e) => {
@@ -189,8 +182,39 @@ export default function ProductCoverflow() {
           </h2>
         </div>
 
-        <div className="relative overflow-hidden">
-          <div className="relative h-[410px]">
+        {/*
+          Card track: no overflow clipping so cards render fully.
+          Buttons are absolute on a full-width element that breaks out of
+          the max-w-7xl container via negative horizontal margins,
+          reaching into the true page gutters on both sides.
+        */}
+        <div className="relative">
+          {/* Full-bleed anchor for the nav buttons — sits behind the cards */}
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 right-0"
+            style={{ marginLeft: "calc(-50vw + 50%)", marginRight: "calc(-50vw + 50%)" }}
+          >
+            {/* Left button */}
+            <button
+              onClick={prev}
+              aria-label="Previous product"
+              className="pointer-events-auto absolute left-6 top-1/2 z-40 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#2A241A]/80 text-[#F4F1EA] backdrop-blur-md transition-colors hover:border-[#C79A5C] hover:text-[#C79A5C]"
+            >
+              <ChevronLeft size={20} />
+            </button>
+
+            {/* Right button */}
+            <button
+              onClick={next}
+              aria-label="Next product"
+              className="pointer-events-auto absolute right-6 top-1/2 z-40 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#2A241A]/80 text-[#F4F1EA] backdrop-blur-md transition-colors hover:border-[#C79A5C] hover:text-[#C79A5C]"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+
+          {/* Card track — no clipping, cards render fully */}
+          <div className="relative h-[420px]">
             {products.map((product, i) => (
               <Card
                 key={product.name}
@@ -200,22 +224,6 @@ export default function ProductCoverflow() {
               />
             ))}
           </div>
-
-          <button
-            onClick={prev}
-            aria-label="Previous product"
-            className="absolute left-2 top-1/2 z-30 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#2A241A]/70 text-[#F4F1EA] backdrop-blur-md transition-colors hover:border-[#C79A5C] hover:text-[#C79A5C] md:left-6"
-          >
-            <ChevronLeft size={20} />
-          </button>
-
-          <button
-            onClick={next}
-            aria-label="Next product"
-            className="absolute right-2 top-1/2 z-30 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#2A241A]/70 text-[#F4F1EA] backdrop-blur-md transition-colors hover:border-[#C79A5C] hover:text-[#C79A5C] md:right-6"
-          >
-            <ChevronRight size={20} />
-          </button>
         </div>
 
         <div className="mt-10 flex items-center justify-center gap-2">
