@@ -22,12 +22,12 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-10 z-30 flex items-center justify-between px-6 transition-all duration-300 md:px-12 md:py-2 ${
-        scrolled
-          ? "bg-white/10 text-ink backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]"
-          : "bg-white/10 text-paper backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]"
-      }`}
-    >
+  className={`fixed inset-x-0 top-10 z-30 flex items-center justify-between px-6 transition-all duration-300 md:px-12 md:py-2 ${
+    scrolled
+      ? "bg-white text-ink border border-black/10 shadow-md"
+      : "bg-white/10 text-paper backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]"
+  }`}
+>
       {!scrolled && (
         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-inherit">
           <div className="absolute -top-1/2 left-0 h-full w-full bg-gradient-to-b from-white/25 via-transparent to-transparent opacity-60" />
@@ -35,14 +35,17 @@ export default function Nav() {
         </div>
       )}
 
-      <a href="#top" className="relative z-10 flex items-center gap-2">
-        <img
-          src="https://resol-tan.vercel.app/_next/image?url=%2FNew-Project-6-e1775111050628.webp&w=640&q=75"
-          alt="logo"
-          width={60}
-          height={40}
-        />
-      </a>
+   <a href="#top" className="relative z-10 flex flex-col items-center gap-1">
+  <img
+    src="https://resol-tan.vercel.app/_next/image?url=%2FNew-Project-6-e1775111050628.webp&w=640&q=75"
+    alt="logo"
+    width={60}
+    height={40}
+  />
+  <span className="relative overflow-hidden bg-gradient-to-r from-amber-600 via-yellow-400 to-black bg-[length:200%_auto] bg-clip-text text-xs font-semibold tracking-wide text-transparent animate-[shine_3s_linear_infinite] md:text-sm">
+    Resol Industry Ltd.
+  </span>
+</a>
 
       <nav className="relative z-10 hidden items-center gap-8 text-sm font-bold md:flex">
         <a href="#capabilities" className="transition-colors hover:opacity-70">

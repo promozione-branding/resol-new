@@ -12,21 +12,31 @@ const sections = [
     heading: "Built on a single question",
     body: "We started in a rented studio with mismatched chairs and one shared monitor. The question on the whiteboard that day — 'what would this look like if it actually worked?' — never left. That question still drives every project we take on.",
     textSide: "left",
-    accent: "#2f6fed",
-    accentDeep: "#173a8a",
-    tint: "#00c4b5",
-    colors: [0xffffff, 0xb3e5fc, 0x0288d1], // keeping – working
+    // Deep indigo night sky — warm gold/amber balls pop beautifully against it
+    accent: "#e8a020",
+    accentDeep: "#f5c842",
+    tint: "#0d1b3e",           // deep midnight indigo background
+    headingGradientStart: "#f0e6c8",
+    headingGradientEnd: "#e8a020",
+    labelColor: "#f5c842",
+    bodyColor: "#fff",
+    colors: [0xf5c842, 0xe8a020, 0xfff2c0, 0xc87b20], // gold / amber / cream / bronze
   },
-{
+  {
     id: 2,
     label: "Our Craft",
     heading: "Precision at the boundary of possibility",
     body: "Every system we build is the result of obsessive refinement. We don't ship until the interaction feels inevitable — until the gap between intention and outcome collapses. This is what craft means to us: not polish for its own sake, but clarity for the people who matter.",
     textSide: "right",
-    accent: "#c1752f",
-    accentDeep: "#7a441a",
-    tint: "#0284c7",          // keep your current light navy
-    colors: [0xfff5e6, 0xf0c27a, 0xb87333],
+    // Dark forest — sage, mint, chartreuse balls feel alive and botanical
+    accent: "#5ecf8a",
+    accentDeep: "#a8e6c2",
+    tint: "#081c12",           // deep forest green background
+    headingGradientStart: "#d4f5e2",
+    headingGradientEnd: "#5ecf8a",
+    labelColor: "#a8e6c2",
+    bodyColor: "#fff",
+    colors: [0x5ecf8a, 0xc8f5d8, 0x2a7a4f, 0xe8faf0], // sage / mint / emerald / near-white
   },
   {
     id: 3,
@@ -34,10 +44,15 @@ const sections = [
     heading: "Diverse minds, singular focus",
     body: "We hire for curiosity first. Our team spans disciplines — engineers who sketch, designers who ship, researchers who argue. What holds us together is a shared intolerance for the good-enough and a belief that the best ideas arrive at the intersection of unlike things.",
     textSide: "left",
-    accent: "#1f9d83",
-    accentDeep: "#0d4238",
-    tint: "#ff7a59",          // keep your current baby pink / light red
-    colors: [0xffffff, 0xffc1b3, 0xd4503c],
+    // Deep burgundy — rose, blush, coral feel warm and human
+    accent: "#e8607a",
+    accentDeep: "#f5a0b0",
+    tint: "#1a0812",           // deep burgundy/plum background
+    headingGradientStart: "#fce8ec",
+    headingGradientEnd: "#e8607a",
+    labelColor: "#f5a0b0",
+    bodyColor: "#fff",
+    colors: [0xe8607a, 0xf5b8c4, 0xfce8ec, 0xb83050], // rose / blush / petal / crimson
   },
   {
     id: 4,
@@ -48,7 +63,11 @@ const sections = [
     accent: "#6c5ce7",
     accentDeep: "#2f2470",
     tint: "#f1eefc",
-    colors: [0x6c5ce7, 0x9d8ff2, 0x2f2470], // keeping – working
+    headingGradientStart: "#1a1a1a",
+    headingGradientEnd: "#6c5ce7",
+    labelColor: "#6c5ce7",
+    bodyColor: "#5a6478",
+    colors: [0x6c5ce7, 0x9d8ff2, 0x2f2470],
   },
 ];
 
@@ -64,15 +83,15 @@ function FloatingBallpit({ slotRefs }) {
     const wrap = wrapRef.current;
     if (!wrap) return;
 
-    const OVERSIZE = 1.4;
+    const OVERSIZE = 1.0; // No oversize needed — overflow:visible handles ball spillage
 
     const firstSlot = slotRefs.current[0];
     if (firstSlot) {
       const r = firstSlot.getBoundingClientRect();
-      const w = r.width * OVERSIZE;
-      const h = r.height * OVERSIZE;
-      const x = r.left - (w - r.width) / 2;
-      const y = r.top  - (h - r.height) / 2;
+      const w = r.width;
+      const h = r.height;
+      const x = r.left;
+      const y = r.top;
       posRef.current = { x, y, w, h };
       wrap.style.left   = `${x}px`;
       wrap.style.top    = `${y}px`;
@@ -98,10 +117,10 @@ function FloatingBallpit({ slotRefs }) {
         const prev = posRef.current;
         const k    = 0.085;
 
-        const tw = target.width  * OVERSIZE;
-        const th = target.height * OVERSIZE;
-        const tx = target.left - (tw - target.width) / 2;
-        const ty = target.top  - (th - target.height) / 2;
+        const tw = target.width;
+        const th = target.height;
+        const tx = target.left;
+        const ty = target.top;
 
         const nx = prev.x + (tx - prev.x) * k;
         const ny = prev.y + (ty - prev.y) * k;
@@ -119,8 +138,6 @@ function FloatingBallpit({ slotRefs }) {
         wrap.style.height  = `${nh}px`;
         wrap.style.opacity = opacity;
 
-        // Only push a new `colors` prop when the active section actually
-        // changes, so Ballpit isn't re-rendered every frame.
         if (bestIndex !== activeIndexRef.current) {
           activeIndexRef.current = bestIndex;
           setColors(sections[bestIndex].colors);
@@ -146,17 +163,19 @@ function FloatingBallpit({ slotRefs }) {
         pointerEvents: "none",
         zIndex:        10,
         opacity:       0,
+        // KEY FIX: allow balls to render outside the container bounds
+        overflow:      "visible",
       }}
     >
-     <Ballpit
-  className="w-full h-full"
-  count={90}
-  gravity={0}                 // ← key change: no settling
-  friction={0.9975}
-  wallBounce={0.99}       
-  followCursor={false}
-  colors={colors}
-/>
+      <Ballpit
+        className="w-full h-full"
+        count={90}
+        gravity={0}
+        friction={0.9975}
+        wallBounce={0.99}
+        followCursor={false}
+        colors={colors}
+      />
     </div>
   );
 }
@@ -165,6 +184,9 @@ function FloatingBallpit({ slotRefs }) {
 function AboutSection({ section, slotRef }) {
   const textRef = useRef(null);
   const isLeft  = section.textSide === "left";
+
+  // Detect dark background sections for text color logic
+  const isDark = ["#0d1b3e", "#081c12", "#1a0812"].includes(section.tint);
 
   useEffect(() => {
     const el = textRef.current;
@@ -187,11 +209,20 @@ function AboutSection({ section, slotRef }) {
     return () => observer.disconnect();
   }, [isLeft]);
 
-  const bgColor = section.tint;
-
   const textBlock = (
-    <div ref={textRef} className="flex flex-col gap-5 max-w-md ml-8">
-      <span className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: section.accentDeep }}>
+    <div
+      ref={textRef}
+      className="flex flex-col gap-5 max-w-md ml-8"
+      style={{
+        // KEY FIX: text sits above the ballpit layer (z-index 10)
+        position: "relative",
+        zIndex: 20,
+      }}
+    >
+      <span
+        className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase"
+        style={{ color: section.labelColor }}
+      >
         <span
           className="inline-block h-1.5 w-1.5 rounded-full"
           style={{ backgroundColor: section.accent }}
@@ -204,7 +235,7 @@ function AboutSection({ section, slotRef }) {
         style={{
           fontFamily: "'Playfair Display', Georgia, serif",
           fontSize: "clamp(1.75rem, 3.2vw, 2.5rem)",
-          background: `linear-gradient(100deg, #1a1a1a 0%, #1a1a1a 55%, ${section.accent} 100%)`,
+          background: `linear-gradient(100deg, ${section.headingGradientStart} 0%, ${section.headingGradientStart} 55%, ${section.headingGradientEnd} 100%)`,
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",
@@ -213,27 +244,46 @@ function AboutSection({ section, slotRef }) {
         {section.heading}
       </h3>
       <p
-        className="text-[#5a6478] font-light leading-loose"
-        style={{ fontSize: "1.05rem", maxWidth: "42ch" }}
+        className="font-light leading-loose"
+        style={{
+          fontSize: "1.05rem",
+          maxWidth: "42ch",
+          color: section.bodyColor,
+        }}
       >
         {section.body}
       </p>
     </div>
   );
 
+  // Placeholder occupies the ballpit column — add a gap buffer on the inner edge
+  // so the ballpit never bleeds into the text column
   const placeholder = (
     <div
       ref={slotRef}
       className="w-full"
-      style={{ minHeight: 420, background: "transparent" }}
+      style={{
+        minHeight: 420,
+        background: "transparent",
+        position: "relative",
+        zIndex: 5,
+        // Inset the slot slightly from the text side so balls don't crowd the copy
+        ...(isLeft
+          ? { paddingLeft: "24px" }   // slot is on right, pad away from text on left
+          : { paddingRight: "24px" }  // slot is on left, pad away from text on right
+        ),
+      }}
       aria-hidden="true"
     />
   );
 
   return (
     <section
-      className="border-t border-black/[0.06] py-28 px-10 transition-colors duration-700"
-      style={{ backgroundColor: bgColor }}
+      className="border-t py-28 px-10 transition-colors duration-700"
+      style={{
+        backgroundColor: section.tint,
+        borderColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+      }}
     >
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         {isLeft ? (
@@ -261,7 +311,7 @@ export default function About() {
   }, []);
 
   return (
-    <div className="bg-[#00c4b5]" id="about">
+    <div id="about">
       <FloatingBallpit slotRefs={slotRefs} />
       {sections.map((section, i) => (
         <AboutSection

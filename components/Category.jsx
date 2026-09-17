@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
-import gsap from "gsap";
 
 // Resol's actual product categories and photography, pulled from
 // resolindustries.com's "Our Product Categories" section.
@@ -45,69 +44,29 @@ const FONT_HEADING = "'Space Grotesk', 'Segoe UI', sans-serif";
 const FONT_BODY = "'Inter', 'Segoe UI', sans-serif";
 
 function CategoryCard({ heading, paragraph, image, index }) {
-  const imageRef = useRef(null);
-  const overlayRef = useRef(null);
-  const headingRef = useRef(null);
-  const paragraphRef = useRef(null);
-  const timeline = useRef(null);
-
-  useEffect(() => {
-    // Starting state: soft-focus image, dimmed, copy resting low with the
-    // paragraph tucked away. Built once so hover just plays/reverses it —
-    // no re-triggering, no jank if the pointer moves in and out quickly.
-    gsap.set(imageRef.current, {
-      filter: "blur(16px) brightness(0.6) saturate(0.85)",
-      scale: 1.18,
-    });
-    gsap.set(paragraphRef.current, { y: 12, opacity: 0 });
-    gsap.set(overlayRef.current, { opacity: 0.82 });
-
-    timeline.current = gsap
-      .timeline({ paused: true, defaults: { ease: "power3.out" } })
-      .to(
-        imageRef.current,
-        { filter: "blur(0px) brightness(0.92) saturate(1.05)", scale: 1.05, duration: 1.1 },
-        0
-      )
-      .to(overlayRef.current, { opacity: 0.32, duration: 0.9 }, 0)
-      .to(headingRef.current, { y: -6, duration: 0.7 }, 0)
-      .to(paragraphRef.current, { y: 0, opacity: 1, duration: 0.55 }, 0.1);
-
-    return () => timeline.current?.kill();
-  }, []);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -5 }}
-      onHoverStart={() => timeline.current?.play()}
-      onHoverEnd={() => timeline.current?.reverse()}
       className="relative flex h-[22rem] flex-col justify-end overflow-hidden rounded-2xl border border-white/10 shadow-[0_20px_50px_-18px_rgba(6,40,25,0.4)]"
     >
       <div
-        ref={imageRef}
         style={{ backgroundImage: `url(${image})` }}
-        className="absolute inset-0 bg-cover bg-center will-change-transform"
+        className="absolute inset-0 bg-cover bg-center"
       />
 
-      <div
-        ref={overlayRef}
-        className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/60 to-emerald-950/10"
-      />
+      <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/60 to-emerald-950/10 opacity-[0.82]" />
 
       <div className="relative z-10 p-7">
         <h3
-          ref={headingRef}
           style={{ fontFamily: FONT_HEADING }}
           className="text-[1.4rem] font-semibold leading-tight tracking-[-0.015em] text-white"
         >
           {heading}
         </h3>
         <p
-          ref={paragraphRef}
           style={{ fontFamily: FONT_BODY }}
           className="mt-3 max-w-[32ch] text-[0.95rem] font-normal leading-relaxed text-white/85"
         >
@@ -145,7 +104,7 @@ export default function CategoryGrid() {
         >
           <h2
             style={{ fontFamily: FONT_HEADING }}
-            className="text-3xl font-semibold tracking-[-0.02em] text-emerald-950 md:text-4xl"
+            className="entry-title text-4xl sm:text-10xl lg:text-15xl font-bold leading-tighter uppercase lg:leading-none text-ink"
           >
             Our Product Categories
           </h2>
