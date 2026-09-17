@@ -115,7 +115,7 @@ export default function WhyChooseUs() {
       className="relative overflow-hidden bg-cover bg-center py-24"
       style={{ backgroundImage: `url(${BG_IMAGE})` }}
     >
-      <div className="absolute inset-0 bg-[#3f4f3f]/55" />
+
 
       <div className="relative mx-auto max-w-6xl px-6">
         <motion.div
@@ -126,11 +126,10 @@ export default function WhyChooseUs() {
           className="mx-auto max-w-2xl text-center"
         >
           <h2 className="text-5xl font-semibold text-white md:text-6xl">
-            Why Choose Us
+            Categories
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-white/75">
-            See why more than 200k users trust Bridge as the core element of
-            their business. Pick your favorite demo &amp; customize away.
+             Explore our wide range of polymer industry products.
           </p>
         </motion.div>
 

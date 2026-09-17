@@ -29,7 +29,7 @@ export default function TrustedBy() {
               <img
                 src={logo.src}
                 alt={logo.name}
-                className="h-full max-h-14 w-auto max-w-[9rem] object-contain grayscale transition-all duration-300 ease-out hover:grayscale-0 md:max-h-16 md:max-w-[10rem]"
+                className="h-full max-h-14 w-auto max-w-[9rem] object-contain md:max-h-16 md:max-w-[10rem]"
               />
             </div>
           ))}

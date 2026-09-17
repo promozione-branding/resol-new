@@ -37,13 +37,13 @@ export default function Nav() {
 
    <a href="#top" className="relative z-10 flex flex-col items-center gap-1">
   <img
-    src="https://resol-tan.vercel.app/_next/image?url=%2FNew-Project-6-e1775111050628.webp&w=640&q=75"
+    src="/logo.png"
     alt="logo"
     width={60}
     height={40}
   />
-  <span className="relative overflow-hidden bg-gradient-to-r from-amber-600 via-yellow-400 to-black bg-[length:200%_auto] bg-clip-text text-xs font-semibold tracking-wide text-transparent animate-[shine_3s_linear_infinite] md:text-sm">
-    Resol Industry Ltd.
+  <span className="relative overflow-hidden text-xs font-semibold tracking-wide text-white">
+    Resol Industries Ltd.
   </span>
 </a>
 
