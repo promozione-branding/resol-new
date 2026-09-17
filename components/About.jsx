@@ -3,6 +3,8 @@
 import { useEffect, useRef, useCallback } from "react";
 
 // ─── Section Data ─────────────────────────────────────────────────────────────
+// Each section carries its own accent so the page reads as a considered
+// palette (steel blue → copper → teal → indigo) rather than one repeated hue.
 
 const sections = [
   {
@@ -11,6 +13,9 @@ const sections = [
     heading: "Built on a single question",
     body: "We started in a rented studio with mismatched chairs and one shared monitor. The question on the whiteboard that day — 'what would this look like if it actually worked?' — never left. That question still drives every project we take on.",
     textSide: "left",
+    accent: "#2f6fed",       // steel blue
+    accentDeep: "#173a8a",
+    tint: "#eef3fc",
   },
   {
     id: 2,
@@ -18,6 +23,9 @@ const sections = [
     heading: "Precision at the boundary of possibility",
     body: "Every system we build is the result of obsessive refinement. We don't ship until the interaction feels inevitable — until the gap between intention and outcome collapses. This is what craft means to us: not polish for its own sake, but clarity for the people who matter.",
     textSide: "right",
+    accent: "#c1752f",       // copper / industrial amber
+    accentDeep: "#7a441a",
+    tint: "#faf1e6",
   },
   {
     id: 3,
@@ -25,6 +33,9 @@ const sections = [
     heading: "Diverse minds, singular focus",
     body: "We hire for curiosity first. Our team spans disciplines — engineers who sketch, designers who ship, researchers who argue. What holds us together is a shared intolerance for the good-enough and a belief that the best ideas arrive at the intersection of unlike things.",
     textSide: "left",
+    accent: "#1f9d83",       // teal / lab green
+    accentDeep: "#0d4238",
+    tint: "#eaf6f2",
   },
   {
     id: 4,
@@ -32,12 +43,17 @@ const sections = [
     heading: "Toward something we haven't named yet",
     body: "We're not optimizing toward a roadmap; we're moving toward a feeling. The work ahead is harder, stranger, and more consequential than anything we've done. We're building the team and the tools to meet it — and we're looking for people who find that prospect exciting rather than frightening.",
     textSide: "right",
+    accent: "#6c5ce7",       // indigo
+    accentDeep: "#2f2470",
+    tint: "#f1eefc",
   },
 ];
 
 // ─── Three.js Hook ────────────────────────────────────────────────────────────
+// colorTargetRef lets the parent tell the scene which section's accent to
+// drift toward, so the object's color changes as you scroll between sections.
 
-function useGlobalThree(canvasRef) {
+function useGlobalThree(canvasRef, colorTargetRef) {
   useEffect(() => {
     let animId;
 
@@ -52,14 +68,13 @@ function useGlobalThree(canvasRef) {
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-      // Slightly further back so the rings don't get clipped
       camera.position.z = 5.2;
 
       const knot = new THREE.Mesh(
         new THREE.TorusKnotGeometry(0.95, 0.30, 160, 24, 2, 3),
         new THREE.MeshStandardMaterial({
-          color: 0x3a7bd5,
-          emissive: 0x1a3a80,
+          color: 0x2f6fed,
+          emissive: 0x173a8a,
           metalness: 0.85,
           roughness: 0.1,
         })
@@ -75,7 +90,7 @@ function useGlobalThree(canvasRef) {
 
       const ring2 = new THREE.Mesh(
         new THREE.TorusGeometry(2.5, 0.013, 8, 120),
-        new THREE.MeshBasicMaterial({ color: 0x3a7bd5, transparent: true, opacity: 0.28 })
+        new THREE.MeshBasicMaterial({ color: 0x1f9d83, transparent: true, opacity: 0.28 })
       );
       ring2.rotation.x = -Math.PI / 5;
       ring2.rotation.z = Math.PI / 6;
@@ -91,7 +106,8 @@ function useGlobalThree(canvasRef) {
         pPos[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
         pPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
         pPos[i * 3 + 2] = r * Math.cos(phi);
-        const c = new THREE.Color().setHSL(0.6 + Math.random() * 0.1, 0.8, 0.65);
+        // particles cycle across the whole palette's hue range, not just blue
+        const c = new THREE.Color().setHSL(Math.random(), 0.55, 0.62);
         pCol[i * 3] = c.r; pCol[i * 3 + 1] = c.g; pCol[i * 3 + 2] = c.b;
       }
       const pGeo = new THREE.BufferGeometry();
@@ -103,7 +119,7 @@ function useGlobalThree(canvasRef) {
       );
       scene.add(particles);
 
-      const light1 = new THREE.PointLight(0x3a7bd5, 7, 14);
+      const light1 = new THREE.PointLight(0x2f6fed, 7, 14);
       light1.position.set(3, 2, 3);
       scene.add(light1);
 
@@ -112,6 +128,9 @@ function useGlobalThree(canvasRef) {
       scene.add(light2);
 
       scene.add(new THREE.AmbientLight(0x8eaaff, 1.0));
+
+      const tmpColor = new THREE.Color();
+      const tmpEmissive = new THREE.Color();
 
       let tick = 0;
       const animate = () => {
@@ -124,6 +143,16 @@ function useGlobalThree(canvasRef) {
         particles.rotation.y += 0.001;
         light1.position.x = Math.sin(tick) * 3;
         light1.position.y = Math.cos(tick * 0.7) * 2;
+
+        // Smoothly drift the knot + key light toward the active section's accent
+        const target = colorTargetRef.current;
+        if (target) {
+          tmpColor.set(target.accent);
+          tmpEmissive.set(target.accentDeep);
+          knot.material.color.lerp(tmpColor, 0.04);
+          knot.material.emissive.lerp(tmpEmissive, 0.04);
+          light1.color.lerp(tmpColor, 0.04);
+        }
 
         const w = canvas.clientWidth;
         const h = canvas.clientHeight;
@@ -139,14 +168,15 @@ function useGlobalThree(canvasRef) {
 
     init();
     return () => { if (animId) cancelAnimationFrame(animId); };
-  }, []);
+  }, [colorTargetRef]);
 }
 
 // ─── Floating Canvas ──────────────────────────────────────────────────────────
 
 function FloatingCanvas({ slotRefs }) {
   const canvasRef = useRef(null);
-  useGlobalThree(canvasRef);
+  const colorTargetRef = useRef({ accent: "#2f6fed", accentDeep: "#173a8a" });
+  useGlobalThree(canvasRef, colorTargetRef);
   const posRef   = useRef({ x: 0, y: 0, w: 0, h: 0 });
   const frameRef = useRef(null);
 
@@ -154,7 +184,6 @@ function FloatingCanvas({ slotRefs }) {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // How much larger than the slot the canvas should be (prevents top/bottom crop)
     const OVERSIZE = 1.4;
 
     const firstSlot = slotRefs.current[0];
@@ -175,20 +204,20 @@ function FloatingCanvas({ slotRefs }) {
       const vh = window.innerHeight;
       let bestScore = -Infinity;
       let target = null;
+      let bestIndex = 0;
 
-      slotRefs.current.forEach((el) => {
+      slotRefs.current.forEach((el, i) => {
         if (!el) return;
         const rect   = el.getBoundingClientRect();
         const slotCY = rect.top + rect.height / 2;
         const score  = -Math.abs(slotCY - vh / 2);
-        if (score > bestScore) { bestScore = score; target = rect; }
+        if (score > bestScore) { bestScore = score; target = rect; bestIndex = i; }
       });
 
       if (target) {
         const prev = posRef.current;
         const k    = 0.085;
 
-        // Target size is larger than the slot so geometry has room
         const tw = target.width  * OVERSIZE;
         const th = target.height * OVERSIZE;
         const tx = target.left - (tw - target.width) / 2;
@@ -209,6 +238,15 @@ function FloatingCanvas({ slotRefs }) {
         canvas.style.width   = `${nw}px`;
         canvas.style.height  = `${nh}px`;
         canvas.style.opacity = opacity;
+
+        // Hand the nearest-to-center section's palette to the 3D scene
+        const activeSection = sections[bestIndex];
+        if (activeSection) {
+          colorTargetRef.current = {
+            accent: activeSection.accent,
+            accentDeep: activeSection.accentDeep,
+          };
+        }
       }
 
       frameRef.current = requestAnimationFrame(update);
@@ -228,7 +266,7 @@ function FloatingCanvas({ slotRefs }) {
         width:         400,
         height:        400,
         pointerEvents: "none",
-        zIndex:        10,          // below navbar (z-20)
+        zIndex:        10,
         opacity:       0,
         background:    "transparent",
       }}
@@ -241,24 +279,25 @@ function FloatingCanvas({ slotRefs }) {
 function AboutHero() {
   return (
     <div className="bg-[#f4f1ea] border-b border-black/[0.06] py-24 px-6 text-center">
-      <p className="text-[#3a7bd5] text-xs font-semibold tracking-[0.22em] uppercase mb-5">
+      <p className="text-[#2f6fed] text-xs font-semibold tracking-[0.22em] uppercase mb-5">
         Who we are
       </p>
 
-      <h2
-        className="font-bold leading-none tracking-tight mb-6 mx-auto"
-        style={{
-          fontFamily: "'Playfair Display', Georgia, serif",
-          fontSize: "clamp(3rem, 8vw, 6rem)",
-          background: "linear-gradient(135deg, #1a1a1a 0%, #3a7bd5 50%, #6c5ce7 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          maxWidth: "20ch",
-        }}
-      >
-        About Us
-      </h2>
+<h2 
+  className="font-bold leading-none tracking-tight mb-6 mx-auto" 
+  style={{ 
+    fontFamily: "'Playfair Display', Georgia, serif", 
+    fontSize: "clamp(3rem, 8vw, 6rem)", 
+    // Rich gold and black gradient for a premium look
+    background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #000000 100%)", 
+    WebkitBackgroundClip: "text", 
+    WebkitTextFillColor: "transparent", 
+    backgroundClip: "text", 
+    maxWidth: "20ch", 
+  }} 
+> 
+  About Us 
+</h2>
 
       <p
         className="text-[#5a6478] font-light leading-relaxed mx-auto max-w-md"
@@ -298,19 +337,29 @@ function AboutSection({ section, slotRef }) {
     return () => observer.disconnect();
   }, [isLeft]);
 
-  // Soft alternating light tones (not pure white)
-  const bgColor = section.id % 2 !== 0 ? "#f4f1ea" : "#efebe3";
+  // Background tint now follows each section's own accent family instead of
+  // a flat cream/beige alternation, so the color shift reads as intentional.
+  const bgColor = section.tint;
 
   const textBlock = (
     <div ref={textRef} className="flex flex-col gap-5 max-w-md">
-      <span className="text-[#6c5ce7] text-xs font-semibold tracking-[0.2em] uppercase">
+      <span className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: section.accentDeep }}>
+        <span
+          className="inline-block h-1.5 w-1.5 rounded-full"
+          style={{ backgroundColor: section.accent }}
+          aria-hidden="true"
+        />
         {section.label}
       </span>
       <h3
-        className="font-bold leading-snug tracking-tight text-[#1a1a1a]"
+        className="font-bold leading-snug tracking-tight"
         style={{
           fontFamily: "'Playfair Display', Georgia, serif",
           fontSize: "clamp(1.75rem, 3.2vw, 2.5rem)",
+          background: `linear-gradient(100deg, #1a1a1a 0%, #1a1a1a 55%, ${section.accent} 100%)`,
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
         }}
       >
         {section.heading}
@@ -335,7 +384,7 @@ function AboutSection({ section, slotRef }) {
 
   return (
     <section
-      className="border-t border-black/[0.06] py-28 px-10"
+      className="border-t border-black/[0.06] py-28 px-10 transition-colors duration-700"
       style={{ backgroundColor: bgColor }}
     >
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">

@@ -6,7 +6,15 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => {
+      const heroEl = document.getElementById("top");
+      if (!heroEl) return;
+
+      const rect = heroEl.getBoundingClientRect();
+
+      setScrolled(rect.bottom <= window.innerHeight / 2);
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -14,13 +22,20 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-10 z-30 flex items-center justify-between px-6 transition-colors duration-300 md:px-12 md:py-2 ${
+      className={`fixed inset-x-0 top-10 z-30 flex items-center justify-between px-6 transition-all duration-300 md:px-12 md:py-2 ${
         scrolled
-          ? "bg-paper text-ink shadow-sm"
-          : "bg-transparent text-paper"
+          ? "bg-white/10 text-ink backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]"
+          : "bg-white/10 text-paper backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]"
       }`}
     >
-      <a href="#top" className="flex items-center gap-2">
+      {!scrolled && (
+        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-inherit">
+          <div className="absolute -top-1/2 left-0 h-full w-full bg-gradient-to-b from-white/25 via-transparent to-transparent opacity-60" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+        </div>
+      )}
+
+      <a href="#top" className="relative z-10 flex items-center gap-2">
         <img
           src="https://resol-tan.vercel.app/_next/image?url=%2FNew-Project-6-e1775111050628.webp&w=640&q=75"
           alt="logo"
@@ -29,7 +44,7 @@ export default function Nav() {
         />
       </a>
 
-      <nav className="hidden items-center gap-8 text-sm font-bold md:flex">
+      <nav className="relative z-10 hidden items-center gap-8 text-sm font-bold md:flex">
         <a href="#capabilities" className="transition-colors hover:opacity-70">
           Home
         </a>
@@ -39,13 +54,20 @@ export default function Nav() {
         <a href="#contact" className="transition-colors hover:opacity-70">
           Contact
         </a>
+                <a href="#articles" className="transition-colors hover:opacity-70">
+          Articles
+        </a>
+                <a href="#industry" className="transition-colors hover:opacity-70">
+          Industry
+        </a>
       </nav>
+
       <a
         href="#contact"
-        className={`rounded-full border px-5 py-2.5 text-sm font-bold transition-colors ${
+        className={`relative z-10 rounded-full border px-5 py-2.5 text-sm font-bold transition-colors ${
           scrolled
             ? "border-ink/20 hover:border-ink"
-            : "border-paper/40 hover:border-paper"
+            : "border-white/30 bg-white/10 hover:bg-white/20 hover:border-white/50"
         }`}
       >
         Get in touch
