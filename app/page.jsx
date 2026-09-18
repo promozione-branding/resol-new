@@ -20,7 +20,7 @@ export default function Home() {
       <Hero />
       <TrustedBy/>
       <About/>
-      {/* <Scroll/> */}
+      <Scroll/>
       {/* <BestSeller /> */}
       <WhyChooseUs/>
       <Counter/>

@@ -14,10 +14,9 @@ export default function Hero() {
         poster="/images/hero-poster.jpg"
       />
 
-
       <div className="relative z-10 flex flex-col items-center px-6 text-center md:px-12">
-        <h1 className="font-josh text-8xl sm:text-10xl lg:text-15xl font-bold leading-tighter uppercase lg:leading-none text-[#ffffff]">
-          CALCIUM CARBONATE
+        <h1 className="font-josh text-8xl sm:text-10xl lg:text-15xl font-bold leading-tighter uppercase lg:mt-16 lg:leading-none text-[#ffffff]">
+          PVC Resin &amp; Calcium Carbonate
         </h1>
         <p className="mb-6 max-w-full text-lg text-white pt-4">
           At Resol Industries, we are committed to providing reliable industrial materials through quality-focused sourcing, consistent product standards, dependable service and strong business relationships.
@@ -27,7 +26,7 @@ export default function Hero() {
             href="#contact"
             className="bg-[#ffffff] px-6 py-3 text-sm font-medium text-ink transition-opacity hover:opacity-85 font-semibold"
           >
-            Book a call
+            Inquire Now
           </a>
         </div>
       </div>
