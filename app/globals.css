@@ -14,9 +14,7 @@ html {
   color: #030303;
 }
 
-/* Respect reduced-motion preferences: the coil still renders, but its
-   scroll-driven and idle rotation are stilled in SpringCanvas.tsx via the
-   same media query check. This just covers CSS-level motion. */
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -44,8 +42,8 @@ html {
 
 @layer base {
   .theme {
-    --font-heading: var(--font-sans);
-    --font-sans: var(--font-sans);
+--font-heading: var(--font-jost);
+--font-sans: var(--font-jost); 
   }
   :root {
     --background: oklch(1 0 0);

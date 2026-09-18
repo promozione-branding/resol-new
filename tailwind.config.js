@@ -8,17 +8,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // ─── your existing design tokens (unchanged) ───────────────────
         ink: "#030303",
         paper: "#EDEAE2",
         muted: "rgba(237,234,226,0.56)",
         hairline: "rgba(237,234,226,0.12)",
         ice: "#8FCFE0",
-
-        // ─── shadcn/ui tokens, mapped to the CSS variables in globals.css ──
-        // These are what `border-border`, `bg-background`, `text-foreground`,
-        // `ring-ring`, etc. resolve to. Required for the shadcn base layer
-        // (and any shadcn components, like Ballpit's dependencies) to compile.
         background: "var(--background)",
         foreground: "var(--foreground)",
         card: {
@@ -37,8 +31,6 @@ module.exports = {
           DEFAULT: "var(--secondary)",
           foreground: "var(--secondary-foreground)",
         },
-        // shadcn's "muted" lives here instead of the `muted` key above,
-        // to avoid overriding your existing text-muted usage in Hero.jsx
         "surface-muted": {
           DEFAULT: "var(--muted)",
           foreground: "var(--muted-foreground)",

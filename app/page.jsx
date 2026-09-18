@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import TrustedBy from "@/components/TrustedBy";
 import About from "@/components/About";
 import WhyChooseUs from "@/components/WhyChooseUs"
+import Cta from "@/components/Cta";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       {/* <BestSeller /> */}
       <WhyChooseUs/>
       <Category/>
+      <Cta/>
       <CtaBand />
       <Footer />
     </main>

@@ -16,7 +16,7 @@ export default function Hero() {
 
 
       <div className="relative z-10 flex flex-col items-center px-6 text-center md:px-12">
-        <h1 className="entry-title text-8xl sm:text-10xl lg:text-15xl font-semibold tracking-tight leading-tighter uppercase lg:leading-none text-[#ffffff]">
+        <h1 className="font-josh text-8xl sm:text-10xl lg:text-15xl font-bold leading-tighter uppercase lg:leading-none text-[#ffffff]">
           CALCIUM CARBONATE
         </h1>
         <p className="mb-6 max-w-full text-lg text-white pt-4">

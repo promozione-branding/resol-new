@@ -3,7 +3,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 const jost = Jost({
-  subsets: ["latin"],
+  subsets: ["latin-ext"],
   weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-jost",
   display: "swap",
