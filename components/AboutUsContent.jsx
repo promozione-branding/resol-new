@@ -196,8 +196,12 @@ export default function AboutUsContent() {
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-[#00C4B5] px-5 py-2 rounded-full font-black text-sm uppercase tracking-widest mb-8 lg:mt-8">
             <Sparkles className="w-4 h-4 text-[#FFE66D]" /> ESTABLISHED SINCE 2005
           </div>
-          <h1 className="text-[4vw] md:text-[6vw] font-black leading-[0.85] uppercase tracking-tighter text-white drop-shadow-2xl mb-6">
-            About Resol Industries Ltd. <br />
+          <h1 className="text-[2vw] md:text-[3vw] font-black leading-[0.85] uppercase tracking-tighter text-white drop-shadow-2xl mb-6">
+            About Resol Industries Ltd.
+            
+          </h1>
+             <h1 className="text-[4vw] md:text-[6vw] font-black leading-[0.85] uppercase tracking-tighter text-white drop-shadow-2xl mb-6">
+           
             <span className="text-cyan-300">Your Trusted PVC Resin Importer.</span>
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-cyan-150 font-medium max-w-6xl mx-auto leading-relaxed text-white/90 font-semibold">
