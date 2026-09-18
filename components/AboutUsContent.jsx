@@ -14,39 +14,39 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 const reasons = [
   {
-    title: "Wholesale-Friendly",
-    desc: "Flexible quantities that make bulk buying easier for businesses of every size.",
+    title: "Established Industry Experience",
+    desc: "Founded in 2005, we bring extensive experience in importing and distributing industrial materials for customers across India.",
     color: "bg-pink-500",
     top: "22%"
   },
   {
-    title: "Built for Everyday Play",
-    desc: "Durable, child-friendly furniture designed to handle busy classrooms and active little learners.",
+    title: "Customer-Focused Approach",
+    desc: "We focus on understanding customer requirements and building long-term relationships through responsive service, reliability, and transparent business practices.",
     color: "bg-cyan-500",
     top: "42%"
   },
   {
-    title: "Custom Ready",
-    desc: "OEM, private-label, colours, and customization options available for your requirements.",
+    title: "Diverse Product Portfolio",
+    desc: "From PVC Resin and Calcium Carbonate to EVA Resin, PET Resin, Plasticizers, Rubber, Fillers, Activators, and Colourants, our product portfolio caters to varied industrial requirements.",
     color: "bg-amber-500",
     top: "62%"
   },
   {
-    title: "One Partner. Less Hassle.",
-    desc: "From choosing the right products to getting your order dispatched, we keep sourcing simple.",
+    title: "Pan-India Market Reach",
+    desc: "Our operations and distribution network enable us to serve customers across different regions and industries throughout India.",
     color: "bg-emerald-500",
     top: "82%"
   },
 ];
 
 const pillars = [
-  { title: "Scandinavian Design", dept: "Modern Aesthetics", label1: "Sleek", label2: "Design", color: "from-cyan-400 to-blue-500" },
-  { title: "Ergonomic Layouts", dept: "Child Comfort", label1: "Comfy", label2: "Fit", color: "from-pink-400 to-rose-500" },
-  { title: "Tough & Durable", dept: "Built to Last", label1: "Solid", label2: "Build", color: "from-amber-400 to-orange-500" },
-  { title: "Interactive Elements", dept: "Play Integration", label1: "Active", label2: "Play", color: "from-emerald-400 to-teal-500" },
+  { title: "Quality-Focused Sourcing", dept: "Global Sourcing", label1: "Trusted", label2: "Sources", color: "from-cyan-400 to-blue-500" },
+  { title: "Consistent Product Standards", dept: "Quality Control", label1: "Consistent", label2: "Quality", color: "from-pink-400 to-rose-500" },
+  { title: "Customer-Centric Approach", dept: "Client Focus", label1: "Customer", label2: "Focus", color: "from-amber-400 to-orange-500" },
+  { title: "Long-Term Relationships", dept: "Business Trust", label1: "Lasting", label2: "Trust", color: "from-emerald-400 to-teal-500" },
 ];
 
-export default function WhyChooseUsPageContent() {
+export default function AboutUsContent() {
   const mainRef = useRef(null);
   const heroRef = useRef(null);
   const heroBgRef = useRef(null);
@@ -167,7 +167,7 @@ export default function WhyChooseUsPageContent() {
   return (
     <div
       ref={mainRef}
-      className="bg-[#082f49] text-white font-quicksand selection:bg-pink-500 selection:text-white relative lg:mt-20"
+      className="bg-[#082f49] text-white font-quicksand selection:bg-pink-500 selection:text-white relative lg:mt-20 relative overflow-x-hidden"
     >
 
       <section
@@ -180,7 +180,7 @@ export default function WhyChooseUsPageContent() {
         >
           <Image
             src="/Brightly_lit_empty_playroom_toys_202608081652.jpeg"
-            alt="ToyPark Design Lab"
+            alt="Resol Industries Ltd."
             fill
             className="object-cover saturate-150 brightness-[0.35]"
             priority
@@ -191,37 +191,37 @@ export default function WhyChooseUsPageContent() {
 
         <div
           ref={heroTextRef}
-          className="relative z-10 text-center px-6 will-change-transform max-w-4xl"
+          className="relative z-10 text-center px-6 will-change-transform max-w-5xl"
         >
-          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-[#00C4B5] px-5 py-2 rounded-full font-black text-sm uppercase tracking-widest mb-8">
-            <Sparkles className="w-4 h-4 text-[#FFE66D]" /> WHY BUSINESSES CHOOSE US
+          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-[#00C4B5] px-5 py-2 rounded-full font-black text-sm uppercase tracking-widest mb-8 lg:mt-8">
+            <Sparkles className="w-4 h-4 text-[#FFE66D]" /> ESTABLISHED SINCE 2005
           </div>
-          <h1 className="text-[9vw] md:text-[7vw] font-black leading-[0.85] uppercase tracking-tighter text-white drop-shadow-2xl mb-6">
-            Play School Furniture <br />
-            <span className="text-cyan-300">That Works as Hard as You Do.</span>
+          <h1 className="text-[4vw] md:text-[6vw] font-black leading-[0.85] uppercase tracking-tighter text-white drop-shadow-2xl mb-6">
+            About Resol Industries Ltd. <br />
+            <span className="text-cyan-300">Your Trusted PVC Resin Importer.</span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-cyan-150 font-medium max-w-3xl mx-auto leading-relaxed text-white/90">
-            From playful classrooms to busy activity spaces, our play school furniture is designed around the way children learn, move, and grow—while giving businesses the quality, flexibility, and support they need.
+          <p className="text-base sm:text-lg md:text-xl text-cyan-150 font-medium max-w-6xl mx-auto leading-relaxed text-white/90 font-semibold">
+            Resol Industries Ltd. (RIL) is an established PVC Resin importer founded in 2005, with its head office in New Delhi, India. We specialize in importing and distributing a diverse range of industrial materials, including PVC Resin, Calcium Carbonate, EVA Resin, LLDPE, LDPE, PET Resin, Plasticizers, Natural &amp; Synthetic Rubber, Fillers, Activators and Colorants.
           </p>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 text-xs font-bold tracking-widest uppercase">
+        {/* <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 text-xs font-bold tracking-widest uppercase">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center pt-2">
             <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" />
           </div>
           Scroll
-        </div>
+        </div> */}
       </section>
 
       <section className="board-game-section relative w-full min-h-[220vh] bg-[#0ea5e9] overflow-hidden rounded-t-[4rem] border-t-8 border-cyan-300 shadow-[0_-20px_60px_rgba(14,165,233,0.5)]">
 
         <div className="absolute top-20 inset-x-0 text-center z-20 reveal-up px-6">
           <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tight text-white drop-shadow-lg">
-            Our Core Promises
+            What Sets Us Apart
           </h2>
           <p className="text-cyan-150 font-semibold text-lg mt-4 text-white/90">
-            Discover what sets us apart on our journey of quality wholesale.
+            With more than two decades of experience in the industry, we&apos;ve built our business around reliable importing, diverse product offerings, and strong customer relationships.
           </p>
         </div>
 
@@ -285,11 +285,11 @@ export default function WhyChooseUsPageContent() {
         <div className="text-center mb-20 reveal-up">
           <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tight inline-block mb-6">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-amber-400">
-              Unbox Our Pillars
+              Our Commitment to Quality
             </span>
           </h2>
           <p className="text-xl text-cyan-200 font-medium max-w-2xl mx-auto">
-            Hover each box to reveal how we design our playroom products.
+            Hover each box to see what drives our commitment to quality and reliability.
           </p>
         </div>
 
@@ -338,25 +338,25 @@ export default function WhyChooseUsPageContent() {
 
           <div className="lg:col-span-6 flex flex-col gap-6 text-left reveal-up">
             <span className="text-[#00C4B5] font-black uppercase tracking-widest text-sm">
-              QUALITY &amp; SAFETY
+              OUR BUSINESS
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
-              Safety Isn’t an Add-On. <br />
-              <span className="bg-gradient-to-r from-[#00C4B5] via-[#38BDF8] to-[#FFE66D] bg-clip-text text-transparent">It’s the Starting Point.</span>
+              Built Around Reliable Sourcing. <br />
+              <span className="bg-gradient-to-r from-[#00C4B5] via-[#38BDF8] to-[#FFE66D] bg-clip-text text-transparent">Driven by Long-Term Relationships.</span>
             </h2>
             <p className="text-slate-200 text-base md:text-lg leading-relaxed font-semibold">
-              When it comes to kids, there’s no room for shortcuts. From carefully selected materials and thoughtful designs to strict quality checks and applicable safety standards, every product goes through a process built around one priority—keeping little ones safe while they play, learn, and explore.
+              Our business is built around international sourcing and the import of industrial materials for the Indian market. We work with established global sources to maintain a diverse product portfolio and dependable availability. Our products are marketed under the Resol Industries brand, allowing us to build a consistent presence in the Indian market while maintaining our focus on product quality and customer requirements.
             </p>
             <p className="text-[#00C4B5] text-lg sm:text-xl font-black tracking-wide">
-              Quality checked. Safety focused. Built with confidence.
+              Reliable sourcing. Consistent quality. Nationwide reach.
             </p>
           </div>
 
           <div className="lg:col-span-6 flex justify-center items-center reveal-up w-full">
             <div className="relative w-full h-[240px] sm:h-[340px] rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl">
               <Image
-                src="/Organized_playroom_with_toys_2K_202608081617.jpeg"
-                alt="Quality Checked Safety Certified Kids Furniture"
+                src="/about-us-4.webp"
+                alt="Resol Industries Quality-Checked Industrial Materials"
                 fill
                 className="object-cover"
               />
@@ -376,17 +376,17 @@ export default function WhyChooseUsPageContent() {
         />
         <div className="relative z-10 max-w-4xl mx-auto reveal-up">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white uppercase tracking-tight mb-6">
-            GOT BIG PLANS? LET’S PLAY.
+            LET’S DISCUSS YOUR REQUIREMENTS
           </h2>
           <p className="text-cyan-50 text-lg sm:text-xl font-semibold mb-10 max-w-2xl mx-auto text-white/95">
-            From your first bulk order to your next big idea, ToyPark is here with the products, experience, and support to help you make it happen.
+            Looking for PVC Resin, Calcium Carbonate, or other imported industrial materials? Get in touch with Resol Industries to discuss your requirements and find the right products for your business.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href="/contact" className="inline-block bg-white text-[#0284c7] px-8 py-4 rounded-full font-black text-base sm:text-lg shadow-[0_5px_0_rgb(2,132,199)] hover:translate-y-0.5 hover:shadow-[0_2px_0_rgb(2,132,199)] transition-all duration-200 uppercase tracking-wide">
-              Start a Conversation
+              Contact Us Today
             </Link>
             <Link href="/products" className="inline-block bg-transparent text-white border-2 border-white px-8 py-4 rounded-full font-black text-base sm:text-lg hover:bg-white/10 transition-colors uppercase tracking-wide">
-              Explore Wholesale
+              View Our Products
             </Link>
           </div>
         </div>

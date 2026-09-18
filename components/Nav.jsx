@@ -54,19 +54,19 @@ export default function Nav() {
         <a href="/about" className="transition-colors hover:opacity-70">
           About
         </a>
-        <a href="#contact" className="transition-colors hover:opacity-70">
+        <a href="/contact" className="transition-colors hover:opacity-70">
           Contact
         </a>
-                <a href="#articles" className="transition-colors hover:opacity-70">
+                <a href="/articles" className="transition-colors hover:opacity-70">
           Articles
         </a>
-                <a href="#industry" className="transition-colors hover:opacity-70">
+                <a href="/industry" className="transition-colors hover:opacity-70">
           Industry
         </a>
       </nav>
 
       <a
-        href="#contact"
+        href="/contact"
         className={`relative z-10 rounded-full border px-5 py-2.5 text-sm font-bold transition-colors ${
           scrolled
             ? "border-ink/20 hover:border-ink"

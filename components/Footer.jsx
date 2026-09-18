@@ -17,9 +17,6 @@ import {
 } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 
-/* ============================================================
-   OFFICE DATA
-============================================================ */
 
 const offices = [
   {
@@ -48,16 +45,12 @@ const offices = [
   },
 ];
 
-/* ============================================================
-   FOOTER
-============================================================ */
+
 
 export default function Footer() {
   const [showTop, setShowTop] = useState(false);
 
-  /* ============================================================
-     SCROLL
-  ============================================================ */
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,9 +64,7 @@ export default function Footer() {
     };
   }, []);
 
-  /* ============================================================
-     BACK TO TOP
-  ============================================================ */
+
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -212,7 +203,7 @@ export default function Footer() {
               >
 
                 <img
-                  src="/footerlogo.webp"
+                  src="/logo.png"
                   alt="Resol Industries Ltd."
                   className="
                     h-auto
