@@ -25,7 +25,7 @@ export default function Nav() {
   className={`fixed inset-x-0 top-10 z-30 flex items-center justify-between px-6 transition-all duration-300 md:px-12 md:py-2 ${
     scrolled
       ? "bg-white text-ink border border-black/10 shadow-md"
-      : "bg-white/10 text-paper backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]"
+      : "bg-white text-ink border border-black/10 shadow-md"
   }`}
 >
       {!scrolled && (
@@ -70,7 +70,7 @@ export default function Nav() {
         className={`relative z-10 rounded-full border px-5 py-2.5 text-sm font-bold transition-colors ${
           scrolled
             ? "border-ink/20 hover:border-ink"
-            : "border-white/30 bg-white/10 hover:bg-white/20 hover:border-white/50"
+            : "border-white/30 bg-black/80 hover:bg-yellow-400 hover:border-white/50 text-white"
         }`}
       >
         Get in touch

@@ -3,7 +3,6 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Category from "@/components/Category";
 import BestSeller from "@/components/BestSeller";
-import CtaBand from "@/components/CtaBand";
 import Footer from "@/components/Footer";
 import TrustedBy from "@/components/TrustedBy";
 import About from "@/components/About";
@@ -26,7 +25,6 @@ export default function Home() {
       <Counter/>
       <Category/>
       <Cta/>
-      <CtaBand />
       <Footer />
     </main>
   );

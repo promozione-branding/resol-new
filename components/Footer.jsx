@@ -219,10 +219,9 @@ export default function Footer() {
                 className="
                   mt-5
                   max-w-[620px]
-                  font-(--font-lexend)
-                  text-[13px]
-                  leading-6
-                  text-white/40
+                  text-white
+                  text-[18px]
+                  leading-6 
                 "
               >
                 Your trusted partner for polymers, resins, PET resin
@@ -419,7 +418,7 @@ export default function Footer() {
                     <div
                       className="
                         font-(--font-outfit)
-                        text-[11px]
+                        text-[16px]
                         font-bold
                         tracking-[0.15em]
                         text-[#D4A017]
@@ -436,7 +435,7 @@ export default function Footer() {
                       <h4
                         className="
                           font-(--font-outfit)
-                          text-[15px]
+                          text-[20px]
                           font-semibold
                           text-white
                         "
@@ -447,11 +446,11 @@ export default function Footer() {
                       <p
                         className="
                           mt-1
-                          text-[8px]
+                          text-[12px]
                           font-bold
                           uppercase
                           tracking-[1.5px]
-                          text-white/30
+                          text-white
                         "
                       >
                         {office.type}
@@ -466,9 +465,9 @@ export default function Footer() {
                       className="
                         max-w-[500px]
                         font-(--font-lexend)
-                        text-[12px]
+                        text-[16px]
                         leading-6
-                        text-white/40
+                        text-white
                         transition-colors
                         duration-300
                         group-hover:text-white/65
