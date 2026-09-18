@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Ballpit } from "@/components/Ballpit";
 
 const sections = [
@@ -50,30 +50,6 @@ const sections = [
   },
 ];
 
-function SectionBallpit({ colors }) {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        overflow: "hidden",
-        pointerEvents: "none",
-      }}
-      aria-hidden="true"
-    >
-      <Ballpit
-        className="w-full h-full"
-        count={90}
-        gravity={0}
-        friction={0.9975}
-        wallBounce={0.99}
-        followCursor={false}
-        colors={colors}
-      />
-    </div>
-  );
-}
-
 function AboutSection({ section }) {
   const textRef = useRef(null);
   const isLeft = section.textSide === "left";
@@ -101,98 +77,100 @@ function AboutSection({ section }) {
     return () => observer.disconnect();
   }, [isLeft]);
 
-  const textBlock = (
-    <div
-      ref={textRef}
-      className="flex flex-col gap-5 max-w-md"
-      style={{
-        position: "relative",
-        zIndex: 20,
-        padding: isLeft ? "0 48px 0 8px" : "0 8px 0 48px",
-      }}
-    >
-      <span
-        className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase"
-        style={{ color: "#ffffff" }}
-      >
-        <span
-          className="inline-block h-1.5 w-1.5 rounded-full"
-          style={{ backgroundColor: section.accent }}
-          aria-hidden="true"
-        />
-        {section.label}
-      </span>
-
-      <h3
-        className="font-bold leading-snug tracking-tight"
-        style={{
-          fontFamily: "'Playfair Display', Georgia, serif",
-          fontSize: "clamp(1.75rem, 3.2vw, 2.5rem)",
-          color: "#ffffff",
-          background: "none",
-          backgroundImage: "none",
-          WebkitBackgroundClip: "initial",
-          backgroundClip: "initial",
-          WebkitTextFillColor: "#ffffff",
-        }}
-      >
-        {section.heading}
-      </h3>
-
-      <p
-        className="font-light leading-loose"
-        style={{
-          fontSize: "1.05rem",
-          maxWidth: "42ch",
-          color: "#ffffff",
-        }}
-      >
-        {section.body}
-      </p>
-    </div>
-  );
-
-  const ballColumn = (
-    <div
-      style={{
-        position: "relative",
-        minHeight: 420,
-        width: "100%",
-        // Bleed out to cancel section's px-10 (40px) padding on the outer edge
-        marginRight: isLeft ? "-40px" : undefined,
-        marginLeft: !isLeft ? "-40px" : undefined,
-      }}
-    >
-      <SectionBallpit colors={section.colors} />
-    </div>
-  );
-
   return (
     <section
-      className="border-t py-28 px-10 transition-colors duration-700"
+      className="border-t transition-colors duration-700"
       style={{
         backgroundColor: section.tint,
         borderColor: "rgba(255,255,255,0.15)",
+        position: "relative",
         overflow: "hidden",
       }}
     >
+      {/* ── BALL LAYER ── anchored to the <section>, bypasses max-w-7xl entirely */}
       <div
-        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center"
-        style={{ gap: 0 }}
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          left: isLeft ? "50%" : 0,
+          right: isLeft ? 0 : "50%",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
       >
-        {isLeft ? (
-          <>
-            {textBlock}
-            {ballColumn}
-          </>
-        ) : (
-          <>
-            {ballColumn}
-            <div className="md:justify-self-end">
-              {textBlock}
-            </div>
-          </>
-        )}
+        <Ballpit
+          className="w-full h-full"
+          count={90}
+          gravity={0}
+          friction={0.9975}
+          wallBounce={0.99}
+          followCursor={false}
+          colors={section.colors}
+        />
+      </div>
+
+      {/* ── TEXT LAYER ── normal centred container, sits on top */}
+      <div
+        className="relative max-w-7xl mx-auto py-28 px-10"
+        style={{ zIndex: 10 }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: isLeft ? "flex-start" : "flex-end",
+          }}
+        >
+          <div
+            ref={textRef}
+            className="flex flex-col gap-5"
+            style={{
+              width: "50%",
+              paddingRight: isLeft ? "3rem" : 0,
+              paddingLeft: isLeft ? 0 : "3rem",
+            }}
+          >
+            <span
+              className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase"
+              style={{ color: "#ffffff" }}
+            >
+              <span
+                className="inline-block h-1.5 w-1.5 rounded-full"
+                style={{ backgroundColor: section.accent }}
+                aria-hidden="true"
+              />
+              {section.label}
+            </span>
+
+            <h3
+              className="font-bold leading-snug tracking-tight"
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontSize: "clamp(1.75rem, 3.2vw, 2.5rem)",
+                color: "#ffffff",
+                background: "none",
+                backgroundImage: "none",
+                WebkitBackgroundClip: "initial",
+                backgroundClip: "initial",
+                WebkitTextFillColor: "#ffffff",
+              }}
+            >
+              {section.heading}
+            </h3>
+
+            <p
+              className="font-light leading-loose"
+              style={{
+                fontSize: "1.05rem",
+                maxWidth: "42ch",
+                color: "#ffffff",
+              }}
+            >
+              {section.body}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -202,10 +180,7 @@ export default function About() {
   return (
     <div id="about">
       {sections.map((section) => (
-        <AboutSection
-          key={section.id}
-          section={section}
-        />
+        <AboutSection key={section.id} section={section} />
       ))}
     </div>
   );
