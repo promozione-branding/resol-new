@@ -35,7 +35,7 @@ export default function Nav() {
         </div>
       )}
 
-   <a href="#top" className="relative z-10 flex flex-col items-center gap-1">
+   <a href="/" className="relative z-10 flex flex-col items-center gap-1">
   <img
     src="/logo.png"
     alt="logo"
@@ -51,7 +51,7 @@ export default function Nav() {
         <a href="#capabilities" className="transition-colors hover:opacity-70">
           Home
         </a>
-        <a href="#process" className="transition-colors hover:opacity-70">
+        <a href="/about" className="transition-colors hover:opacity-70">
           About
         </a>
         <a href="#contact" className="transition-colors hover:opacity-70">
