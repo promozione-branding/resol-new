@@ -25,7 +25,7 @@ export default function Nav() {
   className={`fixed inset-x-0 top-10 z-30 flex items-center justify-between px-6 transition-all duration-300 md:px-12 md:py-2 ${
     scrolled
       ? "bg-white text-ink border border-black/10 shadow-md"
-      : "bg-white text-ink border border-black/10 shadow-md"
+      : "bg-white/10 text-ink backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]"
   }`}
 >
       {!scrolled && (
@@ -42,7 +42,11 @@ export default function Nav() {
     width={60}
     height={40}
   />
-  <span className="relative overflow-hidden text-xs font-semibold tracking-wide text-white">
+  <span className={ `relative overflow-hidden text-xs font-semibold tracking-wide text-white" ${
+    scrolled
+      ? "text-ink font-semibold"
+      : "bg-transparent text-white"
+  }`}>
     Resol Industries Ltd.
   </span>
 </a>
