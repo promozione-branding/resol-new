@@ -14,7 +14,6 @@ export default function Hero() {
         poster="/images/hero-poster.jpg"
       />
 
-      <div className="absolute inset-0 bg-black/50" />
 
       <div className="relative z-10 flex flex-col items-center px-6 text-center md:px-12">
         <h1 className="entry-title text-8xl sm:text-10xl lg:text-15xl font-semibold tracking-tight leading-tighter uppercase lg:leading-none text-[#ffffff]">

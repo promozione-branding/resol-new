@@ -9,8 +9,8 @@ const logos = [
 
 export default function TrustedBy() {
   return (
-    <section className="border-y border-slate-200 bg-slate-50 py-16">
-      <p className="mb-10 text-center text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+    <section className="border-y border-slate-200 bg-[#00c4b5] py-16">
+      <p className="mb-10 text-center text-sm font-bold uppercase tracking-[0.2em] text-[#fff]">
         Trusted by teams at
       </p>
 

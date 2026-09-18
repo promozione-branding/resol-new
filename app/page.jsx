@@ -17,9 +17,10 @@ export default function Home() {
       <Hero />
       <TrustedBy/>
       <About/>
-      <Category/>
-      <BestSeller />
+      
+      {/* <BestSeller /> */}
       <WhyChooseUs/>
+      <Category/>
       <CtaBand />
       <Footer />
     </main>

@@ -4,8 +4,9 @@ import { cn } from "@/lib/utils";
 
 const jost = Jost({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-jost",
+  display: "swap",
 });
 
 export const metadata = {
@@ -19,7 +20,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={cn(jost.variable, "font-sans")}>
+    <html lang="en" className={cn(jost.variable)}>
       <body className="bg-ink text-paper antialiased">
         {children}
       </body>
