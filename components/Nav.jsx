@@ -51,7 +51,7 @@ export default function Nav() {
   </span>
 </a>
 
-      <nav className="relative z-10 hidden items-center gap-8 text-sm font-bold md:flex">
+      <nav className="relative z-10 hidden items-center gap-8 text-lg font-bold md:flex">
         <a href="/" className="transition-colors hover:opacity-70">
           Home
         </a>
