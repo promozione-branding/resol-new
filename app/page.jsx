@@ -9,6 +9,8 @@ import TrustedBy from "@/components/TrustedBy";
 import About from "@/components/About";
 import WhyChooseUs from "@/components/WhyChooseUs"
 import Cta from "@/components/Cta";
+import Scroll from "@/components/Scroll";
+import Counter from "@/components/Counter";
 
 export default function Home() {
   return (
@@ -18,9 +20,10 @@ export default function Home() {
       <Hero />
       <TrustedBy/>
       <About/>
-      
+      {/* <Scroll/> */}
       {/* <BestSeller /> */}
       <WhyChooseUs/>
+      <Counter/>
       <Category/>
       <Cta/>
       <CtaBand />

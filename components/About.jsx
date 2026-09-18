@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef, useCallback, useState } from "react";
@@ -51,149 +50,16 @@ const sections = [
   },
 ];
 
-function FloatingBallpit({ slotRefs }) {
-  const wrapRef = useRef(null);
-  const posRef = useRef({
-    x: 0,
-    y: 0,
-    w: 0,
-    h: 0,
-  });
-
-  const frameRef = useRef(null);
-
-  const [colors, setColors] = useState(sections[0].colors);
-
-  const activeIndexRef = useRef(0);
-
-  useEffect(() => {
-    const wrap = wrapRef.current;
-
-    if (!wrap) return;
-
-    const firstSlot = slotRefs.current[0];
-
-    if (firstSlot) {
-      const r = firstSlot.getBoundingClientRect();
-
-      const w = r.width;
-      const h = r.height;
-      const x = r.left;
-      const y = r.top;
-
-      posRef.current = {
-        x,
-        y,
-        w,
-        h,
-      };
-
-      wrap.style.left = `${x}px`;
-      wrap.style.top = `${y}px`;
-      wrap.style.width = `${w}px`;
-      wrap.style.height = `${h}px`;
-    }
-
-    const update = () => {
-      const vh = window.innerHeight;
-
-      let bestScore = -Infinity;
-      let target = null;
-      let bestIndex = 0;
-
-      slotRefs.current.forEach((el, i) => {
-        if (!el) return;
-
-        const rect = el.getBoundingClientRect();
-
-        const slotCY = rect.top + rect.height / 2;
-
-        const score = -Math.abs(slotCY - vh / 2);
-
-        if (score > bestScore) {
-          bestScore = score;
-          target = rect;
-          bestIndex = i;
-        }
-      });
-
-      if (target) {
-        const prev = posRef.current;
-
-        const k = 0.085;
-
-        const tw = target.width;
-        const th = target.height;
-        const tx = target.left;
-        const ty = target.top;
-
-        const nx = prev.x + (tx - prev.x) * k;
-        const ny = prev.y + (ty - prev.y) * k;
-        const nw = prev.w + (tw - prev.w) * k;
-        const nh = prev.h + (th - prev.h) * k;
-
-        const slotCY = target.top + target.height / 2;
-
-        const dist = Math.abs(slotCY - vh / 2);
-
-        const opacity = Math.max(
-          0,
-          1 - dist / (vh * 0.75)
-        );
-
-        posRef.current = {
-          x: nx,
-          y: ny,
-          w: nw,
-          h: nh,
-        };
-
-        wrap.style.left = `${nx}px`;
-        wrap.style.top = `${ny}px`;
-        wrap.style.width = `${nw}px`;
-        wrap.style.height = `${nh}px`;
-        wrap.style.opacity = opacity;
-
-        if (bestIndex !== activeIndexRef.current) {
-          activeIndexRef.current = bestIndex;
-
-          setColors(sections[bestIndex].colors);
-        }
-      }
-
-      frameRef.current = requestAnimationFrame(update);
-    };
-
-    frameRef.current = requestAnimationFrame(update);
-
-    return () => {
-      if (frameRef.current) {
-        cancelAnimationFrame(frameRef.current);
-      }
-    };
-  }, [slotRefs]);
-
+function SectionBallpit({ colors }) {
   return (
     <div
-      ref={wrapRef}
       style={{
-        position: "fixed",
-
-        top: 0,
-        left: 0,
-
-        width: 400,
-        height: 400,
-
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
         pointerEvents: "none",
-
-        zIndex: 10,
-
-        opacity: 0,
-
-        // Allows balls to render outside the container
-        overflow: "visible",
       }}
+      aria-hidden="true"
     >
       <Ballpit
         className="w-full h-full"
@@ -208,108 +74,76 @@ function FloatingBallpit({ slotRefs }) {
   );
 }
 
-function AboutSection({ section, slotRef }) {
+function AboutSection({ section }) {
   const textRef = useRef(null);
-
   const isLeft = section.textSide === "left";
 
   useEffect(() => {
     const el = textRef.current;
-
     if (!el) return;
 
-    // Initial animation state
     el.style.opacity = "0";
-
-    el.style.transform = `translateX(${
-      isLeft ? -60 : 60
-    }px)`;
-
-    el.style.transition =
-      "opacity 0.8s ease, transform 0.8s ease";
+    el.style.transform = `translateX(${isLeft ? -60 : 60}px)`;
+    el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           el.style.opacity = "1";
-
           el.style.transform = "translateX(0)";
-
           observer.disconnect();
         }
       },
-      {
-        threshold: 0.25,
-      }
+      { threshold: 0.25 }
     );
 
     observer.observe(el);
-
     return () => observer.disconnect();
   }, [isLeft]);
 
   const textBlock = (
     <div
       ref={textRef}
-      className="flex flex-col gap-5 max-w-md ml-8"
+      className="flex flex-col gap-5 max-w-md"
       style={{
-        // Keep text above Ballpit
         position: "relative",
         zIndex: 20,
+        padding: isLeft ? "0 48px 0 8px" : "0 8px 0 48px",
       }}
     >
-      {/* Section Label */}
       <span
         className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase"
-        style={{
-          color: "#ffffff",
-        }}
+        style={{ color: "#ffffff" }}
       >
         <span
           className="inline-block h-1.5 w-1.5 rounded-full"
-          style={{
-            backgroundColor: section.accent,
-          }}
+          style={{ backgroundColor: section.accent }}
           aria-hidden="true"
         />
-
         {section.label}
       </span>
 
-      {/* Heading */}
       <h3
         className="font-bold leading-snug tracking-tight"
         style={{
-          fontFamily:
-            "'Playfair Display', Georgia, serif",
-
-          fontSize:
-            "clamp(1.75rem, 3.2vw, 2.5rem)",
-
-          // SOLID WHITE TEXT
+          fontFamily: "'Playfair Display', Georgia, serif",
+          fontSize: "clamp(1.75rem, 3.2vw, 2.5rem)",
           color: "#ffffff",
-
-          // Prevent gradient/background from affecting text
           background: "none",
           backgroundImage: "none",
-
           WebkitBackgroundClip: "initial",
           backgroundClip: "initial",
-
           WebkitTextFillColor: "#ffffff",
         }}
       >
         {section.heading}
       </h3>
 
-      {/* Body */}
       <p
         className="font-light leading-loose"
         style={{
           fontSize: "1.05rem",
-
           maxWidth: "42ch",
-
           color: "#ffffff",
         }}
       >
@@ -318,31 +152,19 @@ function AboutSection({ section, slotRef }) {
     </div>
   );
 
-  // Placeholder occupies the Ballpit column
-  const placeholder = (
+  const ballColumn = (
     <div
-      ref={slotRef}
-      className="w-full"
       style={{
-        minHeight: 420,
-
-        background: "transparent",
-
         position: "relative",
-
-        zIndex: 5,
-
-        // Keep balls away from text
-        ...(isLeft
-          ? {
-              paddingLeft: "24px",
-            }
-          : {
-              paddingRight: "24px",
-            }),
+        minHeight: 420,
+        width: "100%",
+        // Bleed out to cancel section's px-10 (40px) padding on the outer edge
+        marginRight: isLeft ? "-40px" : undefined,
+        marginLeft: !isLeft ? "-40px" : undefined,
       }}
-      aria-hidden="true"
-    />
+    >
+      <SectionBallpit colors={section.colors} />
+    </div>
   );
 
   return (
@@ -350,31 +172,22 @@ function AboutSection({ section, slotRef }) {
       className="border-t py-28 px-10 transition-colors duration-700"
       style={{
         backgroundColor: section.tint,
-
-        borderColor:
-          "rgba(255,255,255,0.15)",
+        borderColor: "rgba(255,255,255,0.15)",
+        overflow: "hidden",
       }}
     >
       <div
-        className="
-          max-w-5xl
-          mx-auto
-          grid
-          grid-cols-1
-          md:grid-cols-2
-          gap-16
-          items-center
-        "
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center"
+        style={{ gap: 0 }}
       >
         {isLeft ? (
           <>
             {textBlock}
-            {placeholder}
+            {ballColumn}
           </>
         ) : (
           <>
-            {placeholder}
-
+            {ballColumn}
             <div className="md:justify-self-end">
               {textBlock}
             </div>
@@ -385,32 +198,13 @@ function AboutSection({ section, slotRef }) {
   );
 }
 
-// ─────────────────────────────────────────────
-// Root Export
-// ─────────────────────────────────────────────
-
 export default function About() {
-  const slotRefs = useRef([]);
-
-  const setSlotRef = useCallback((el, i) => {
-    slotRefs.current[i] = el;
-  }, []);
-
   return (
     <div id="about">
-      {/* Floating Ballpit */}
-      <FloatingBallpit
-        slotRefs={slotRefs}
-      />
-
-      {/* About Sections */}
-      {sections.map((section, i) => (
+      {sections.map((section) => (
         <AboutSection
           key={section.id}
           section={section}
-          slotRef={(el) =>
-            setSlotRef(el, i)
-          }
         />
       ))}
     </div>

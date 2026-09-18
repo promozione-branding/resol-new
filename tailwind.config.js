@@ -66,8 +66,8 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      fontFamily: {
-        display: ["var(--font-display)"],
+fontFamily: {
+  display: ["var(--font-jost)", "sans-serif"], 
         body: ["var(--font-body)"],
         sans: ["var(--font-sans)"],
       },

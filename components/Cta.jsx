@@ -295,7 +295,7 @@ export default function Cta() {
                 "
               >
                 <source
-                  src="/13753874_1280_720_25fps.mp4"
+                  src="https://resol-one.vercel.app/13753874_1280_720_25fps.mp4"
                   type="video/mp4"
                 />
               </video>
