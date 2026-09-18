@@ -48,7 +48,7 @@ export default function Nav() {
 </a>
 
       <nav className="relative z-10 hidden items-center gap-8 text-sm font-bold md:flex">
-        <a href="#capabilities" className="transition-colors hover:opacity-70">
+        <a href="/" className="transition-colors hover:opacity-70">
           Home
         </a>
         <a href="/about" className="transition-colors hover:opacity-70">
