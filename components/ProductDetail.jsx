@@ -179,23 +179,21 @@ function RelatedProducts({ products }) {
 export default function ProductDetail({ product, related = [] }) {
   return (
     <main className="relative min-h-screen bg-transparent pt-28 text-black sm:pt-32">
-      {/* ========== Background Video ========== */}
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="h-full w-full object-cover"
-        >
-          {/* Replace with your video path */}
-          <source src="/powder_animation4.mp4" type="video/mp4" />
-          {/* Optional fallback image if video fails */}
-          Your browser does not support the video tag.
-        </video>
-        {/* Soft overlay so glass + text stay readable */}
-        <div className="absolute inset-0 bg-white/30 backdrop-blur-[4px]" />
-      </div>
+<div className="pointer-events-none fixed inset-0 -z-20 h-screen w-screen overflow-hidden">
+  <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    preload="auto"
+    className="absolute left-1/2 top-1/2 min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 object-cover"
+  >
+    <source src="/powder_animation6.mp4" type="video/mp4" />
+  </video>
+
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-white/30 backdrop-blur-[4px]" />
+</div>
 
       <section className="mx-auto max-w-7xl px-6 pb-16 sm:pb-20 mt-6">
         <motion.div initial="hidden" animate="visible" variants={fadeUp}>

@@ -22,7 +22,7 @@ const categories = [
   {
     heading: "Citric Acid",
     paragraph: "A key ingredient across food and pharmaceutical manufacturing.",
-    image: "https://www.resolindustries.com/wp-content/uploads/2026/01/Citric-Acid-2.jpg",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Z-nQqQo5QE8m5H00RDl1yUOtITgVUeJiY-mVWBtYSg&s=10",
   },
   {
     heading: "Fillers, Activators and Colourants",
