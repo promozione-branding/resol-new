@@ -10,6 +10,7 @@ import WhyChooseUs from "@/components/WhyChooseUs"
 import Cta from "@/components/Cta";
 import Scroll from "@/components/Scroll";
 import Counter from "@/components/Counter";
+import FaqQuerySection from "@/components/FAQSection";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
       <Counter/>
       <Category/>
       <Cta/>
+      <FaqQuerySection/>
       <Footer />
     </main>
   );

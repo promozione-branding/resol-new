@@ -6,7 +6,6 @@ const SVG_MASK = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/200
 
 const initialMaskSize = 0.8;
 
-/* RESOL INDUSTRIES ko chota kiya */
 const targetMaskSize = 27;
 
 const easing = 0.15;
@@ -53,9 +52,6 @@ export default function Cta() {
 
         const isMobile = window.innerWidth < 640;
 
-        /* =========================
-           HEADER
-        ========================= */
 
         if (headerText.current) {
           headerText.current.style.opacity = `${Math.max(
@@ -64,9 +60,7 @@ export default function Cta() {
           )}`;
         }
 
-        /* =========================
-           PHASE 1 — MASK ZOOM
-        ========================= */
+     
 
         const zoomProgress = Math.min(
           1,

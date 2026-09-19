@@ -7,14 +7,12 @@ import {
   FaLayerGroup
 } from "react-icons/fa6";
 import { GrResources } from "react-icons/gr";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+
+import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 import AnimatedTitle from "@/components/AnimatedTitle";
 
-/* ============================================================
-   COUNTER DATA
-============================================================ */
 
 const counters = [
   {
@@ -43,16 +41,20 @@ const counters = [
   },
 ];
 
-/* ============================================================
-   COUNT UP
-============================================================ */
+
 
 function CountUp({ end, suffix = "" }) {
   const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.5 });
 
   useEffect(() => {
-    let start = 0;
+    if (!isInView) {
+      setCount(0);
+      return;
+    }
 
+    let start = 0;
     const duration = 1800;
     const incrementTime = 25;
     const totalSteps = duration / incrementTime;
@@ -70,19 +72,15 @@ function CountUp({ end, suffix = "" }) {
     }, incrementTime);
 
     return () => clearInterval(timer);
-  }, [end]);
+  }, [end, isInView]);
 
   return (
-    <>
+    <span ref={ref}>
       {count.toLocaleString()}
       {suffix}
-    </>
+    </span>
   );
 }
-
-/* ============================================================
-   SINGLE STAT
-============================================================ */
 
 function StatItem({ item, index }) {
   const Icon = item.icon;
