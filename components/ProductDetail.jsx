@@ -191,7 +191,7 @@ export default function ProductDetail({ product, related = [] }) {
   <source src="/stock.webm" type="video/webm" />
 </video>
 
-  <div className="absolute inset-0 bg-white/30 backdrop-blur-[6px]" />
+  <div className="absolute inset-0 bg-white/30 backdrop-blur-[4px]" />
 </div>
 
       <section className="mx-auto max-w-7xl px-6 pb-16 sm:pb-20 mt-6">
