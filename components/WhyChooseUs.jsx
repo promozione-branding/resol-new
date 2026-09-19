@@ -8,45 +8,38 @@ const BG_IMAGE =
 const cards = [
   {
     heading: "Polymers (PVC, PE, PP etc.)",
-    paragraph:
-      "Versatile base materials used across a wide range of industries.",
-    image:
-      "https://www.resolindustries.com/wp-content/uploads/2026/01/Polymers.jpg",
+    paragraph: "Versatile base materials used across a wide range of industries.",
+    image: "https://www.resolindustries.com/wp-content/uploads/2026/01/Polymers.jpg",
   },
   {
     heading: "Pet Resin",
-    paragraph:
-      "Premium-grade PET resin for packaging and industrial applications.",
-    image:
-      "https://www.resolindustries.com/wp-content/uploads/2026/04/pet-resin.jpg",
+    paragraph: "Premium-grade PET resin for packaging and industrial applications.",
+    image: "https://www.resolindustries.com/wp-content/uploads/2026/04/pet-resin.jpg",
   },
   {
-    heading: "Calcium Carbonate",
-    paragraph:
-      "A widely used filler that improves product durability.",
-    image:
-      "https://www.resolindustries.com/wp-content/uploads/2026/01/Calcium-Carbonate.jpg",
+    heading: "Natural and Synthetic Rubber",
+    paragraph: "High-performance elastomers for industrial, automotive, and manufacturing applications.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMetI80DGzkneneNZudI5v2rUINGMWm9UHR4YRp03Jag&s=10",
   },
   {
     heading: "Citric Acid",
-    paragraph:
-      "A key ingredient across food and pharmaceutical manufacturing.",
-    image:
-      "https://www.resolindustries.com/wp-content/uploads/2026/01/Citric-Acid-2.jpg",
+    paragraph: "A key ingredient across food and pharmaceutical manufacturing.",
+    image: "https://www.resolindustries.com/wp-content/uploads/2026/01/Citric-Acid-2.jpg",
+  },
+  {
+    heading: "Fillers, Activators and Colourants",
+    paragraph: "Essential additives that enhance product properties, colour, and processing performance.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3_ssZjQWEQmUMCsqNunled4bUFPGTLGoEQvzNe9km9A&s=10",
   },
   {
     heading: "Plasticizers",
-    paragraph:
-      "Additives that enhance the flexibility and strength of polymers.",
-    image:
-      "https://www.resolindustries.com/wp-content/uploads/2026/01/Plasticizers-2.jpg",
+    paragraph: "Additives that enhance the flexibility and strength of polymers.",
+    image: "https://www.resolindustries.com/wp-content/uploads/2026/01/Plasticizers-2.jpg",
   },
   {
     heading: "Melamine",
-    paragraph:
-      "A crucial additive that improves polymer performance.",
-    image:
-      "https://www.resolindustries.com/wp-content/uploads/2026/01/Melamine-2.jpg",
+    paragraph: "A crucial additive that improves polymer performance.",
+    image: "https://www.resolindustries.com/wp-content/uploads/2026/01/Melamine-2.jpg",
   },
 ];
 

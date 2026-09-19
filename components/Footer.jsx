@@ -745,7 +745,7 @@ export default function Footer() {
               className="
                 text-[10px]
                 leading-5
-                text-white/25
+                text-white
               "
             >
               © {new Date().getFullYear()} Resol Industries Ltd.
@@ -792,7 +792,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
-                    text-white/45
+                    text-white
                     transition-colors
                     hover:text-[#D4A017]
                   "

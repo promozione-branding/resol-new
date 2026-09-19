@@ -3,8 +3,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
-// Resol's actual product categories and photography, pulled from
-// resolindustries.com's "Our Product Categories" section.
 const categories = [
   {
     heading: "Polymers (PVC, PE, PP etc.)",
@@ -17,14 +15,19 @@ const categories = [
     image: "https://www.resolindustries.com/wp-content/uploads/2026/04/pet-resin.jpg",
   },
   {
-    heading: "Calcium Carbonate",
-    paragraph: "A widely used filler that improves product durability.",
-    image: "https://www.resolindustries.com/wp-content/uploads/2026/01/Calcium-Carbonate.jpg",
+    heading: "Natural and Synthetic Rubber",
+    paragraph: "High-performance elastomers for industrial, automotive, and manufacturing applications.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMetI80DGzkneneNZudI5v2rUINGMWm9UHR4YRp03Jag&s=10",
   },
   {
     heading: "Citric Acid",
     paragraph: "A key ingredient across food and pharmaceutical manufacturing.",
     image: "https://www.resolindustries.com/wp-content/uploads/2026/01/Citric-Acid-2.jpg",
+  },
+  {
+    heading: "Fillers, Activators and Colourants",
+    paragraph: "Essential additives that enhance product properties, colour, and processing performance.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3_ssZjQWEQmUMCsqNunled4bUFPGTLGoEQvzNe9km9A&s=10",
   },
   {
     heading: "Plasticizers",

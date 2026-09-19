@@ -27,19 +27,19 @@ function Breadcrumb({ product }) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="flex flex-wrap items-center gap-1.5 text-xs text-paper/50"
+      className="flex flex-wrap items-center gap-1.5 text-xs text-black/50"
     >
-      <Link href="/" className="transition-colors hover:text-[#C79A5C]">
+      <Link href="/" className="transition-colors hover:text-[#C79A5C] font-semibold">
         Home
       </Link>
       <ChevronRight size={12} className="shrink-0" />
-      <Link href="/products" className="transition-colors hover:text-[#C79A5C]">
+      <Link href="/products" className="transition-colors hover:text-[#C79A5C] font-semibold">
         Products
       </Link>
       <ChevronRight size={12} className="shrink-0" />
-      <span className="text-paper/50">{product.category}</span>
+      <span className="text-black/50 font-semibold">{product.category}</span>
       <ChevronRight size={12} className="shrink-0" />
-      <span className="text-paper/80">{product.name}</span>
+      <span className="text-black/80 font-semibold">{product.name}</span>
     </nav>
   );
 }
@@ -50,15 +50,15 @@ function Gallery({ product }) {
 
   return (
     <div>
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/30 bg-white/20 shadow-lg backdrop-blur-xl">
         <img
           key={images[active]}
           src={images[active]}
           alt={product.name}
           className="h-full w-full object-cover"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-        <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/40 px-3 py-1 text-[11px] font-medium tracking-wide text-paper/90 backdrop-blur-md">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+        <span className="absolute left-4 top-4 rounded-full border border-white/40 bg-[#C79A5C] px-3 py-1 text-[11px] font-medium tracking-wide text-black/90 backdrop-blur-md">
           {product.category}
         </span>
       </div>
@@ -73,7 +73,7 @@ function Gallery({ product }) {
               className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border transition-colors sm:h-20 sm:w-20 ${
                 active === i
                   ? "border-[#C79A5C]"
-                  : "border-white/10 hover:border-white/30"
+                  : "border-white/30 hover:border-white/50"
               }`}
             >
               <img src={src} alt="" className="h-full w-full object-cover" />
@@ -87,18 +87,18 @@ function Gallery({ product }) {
 
 function SpecTable({ specifications }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10">
+    <div className="overflow-hidden rounded-2xl border border-white/30 bg-white/20 shadow-lg backdrop-blur-xl">
       <table className="w-full text-left text-sm">
         <tbody>
           {specifications.map((row, i) => (
             <tr
               key={row.label}
-              className={i % 2 === 0 ? "bg-white/[0.03]" : "bg-transparent"}
+              className={i % 2 === 0 ? "bg-white/10" : "bg-transparent"}
             >
-              <th className="w-1/2 px-5 py-3.5 font-medium text-paper/60">
+              <th className="w-1/2 px-5 py-3.5 font-medium text-black/60 font-semibold">
                 {row.label}
               </th>
-              <td className="px-5 py-3.5 text-paper/90">{row.value}</td>
+              <td className="px-5 py-3.5 text-black/90 font-semibold">{row.value}</td>
             </tr>
           ))}
         </tbody>
@@ -111,20 +111,20 @@ function RelatedProducts({ products }) {
   if (!products?.length) return null;
 
   return (
-    <section className="border-t border-hairline bg-white/[0.02] py-16 sm:py-20">
+    <section className="border-t border-black/10 bg-white/10 py-16 sm:py-20 backdrop-blur-sm">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-10 flex items-end justify-between gap-4">
           <div>
             <span className="text-[11px] tracking-wide text-[#C79A5C]">
               You may also need
             </span>
-            <h2 className="mt-2 text-2xl font-semibold text-paper sm:text-3xl">
+            <h2 className="mt-2 text-2xl font-semibold text-black sm:text-3xl">
               Related products
             </h2>
           </div>
           <Link
             href="/products"
-            className="hidden items-center gap-1.5 text-sm font-medium text-paper/70 transition-colors hover:text-[#C79A5C] sm:flex"
+            className="hidden items-center gap-1.5 text-sm font-medium text-black/70 transition-colors hover:text-[#C79A5C] sm:flex"
           >
             View all products
             <ArrowRight size={15} />
@@ -143,7 +143,7 @@ function RelatedProducts({ products }) {
             >
               <Link
                 href={`/products/${p.slug}`}
-                className="group block overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-colors hover:border-[#C79A5C]/50"
+                className="group block overflow-hidden rounded-2xl border border-white/30 bg-white/20 shadow-lg backdrop-blur-xl transition-colors hover:border-[#C79A5C]/50"
               >
                 <div className="h-44 w-full overflow-hidden">
                   <img
@@ -156,13 +156,13 @@ function RelatedProducts({ products }) {
                   <span className="text-[11px] tracking-wide text-[#C79A5C]">
                     {p.category}
                   </span>
-                  <h3 className="mt-1 text-lg font-semibold text-paper">
+                  <h3 className="mt-1 text-lg font-semibold text-black">
                     {p.name}
                   </h3>
-                  <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-paper/60">
+                  <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-black/60">
                     {p.tagline}
                   </p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-paper/80 transition-colors group-hover:text-[#C79A5C]">
+                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-black/80 transition-colors group-hover:text-[#C79A5C]">
                     View details
                     <ChevronRight size={14} />
                   </span>
@@ -178,9 +178,26 @@ function RelatedProducts({ products }) {
 
 export default function ProductDetail({ product, related = [] }) {
   return (
-    <main className="bg-ink pt-28 text-paper sm:pt-32">
-      {/* ===================== Header / Gallery / Buy box ===================== */}
-      <section className="mx-auto max-w-6xl px-6 pb-16 sm:pb-20">
+    <main className="relative min-h-screen bg-transparent pt-28 text-black sm:pt-32">
+      {/* ========== Background Video ========== */}
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="h-full w-full object-cover"
+        >
+          {/* Replace with your video path */}
+          <source src="/powder_animation4.mp4" type="video/mp4" />
+          {/* Optional fallback image if video fails */}
+          Your browser does not support the video tag.
+        </video>
+        {/* Soft overlay so glass + text stay readable */}
+        <div className="absolute inset-0 bg-white/30 backdrop-blur-[4px]" />
+      </div>
+
+      <section className="mx-auto max-w-7xl px-6 pb-16 sm:pb-20 mt-6">
         <motion.div initial="hidden" animate="visible" variants={fadeUp}>
           <Breadcrumb product={product} />
         </motion.div>
@@ -201,14 +218,14 @@ export default function ProductDetail({ product, related = [] }) {
             variants={fadeUp}
             transition={{ delay: 0.12 }}
           >
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#C79A5C]">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#C79A5C] font-semibold">
               {product.category}
             </p>
-            <h1 className="mt-3 text-3xl font-semibold leading-tight text-paper sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-semibold leading-tight text-black sm:text-4xl">
               {product.name}
             </h1>
-            <p className="mt-1.5 text-sm text-paper/50">{product.grade}</p>
-            <p className="mt-4 max-w-prose text-[1.05rem] leading-relaxed text-paper/70">
+            <p className="mt-1.5 text-sm text-black/50 font-semibold">{product.grade}</p>
+            <p className="mt-4 max-w-prose text-[1.05rem] leading-relaxed text-black/70 font-semibold">
               {product.tagline}
             </p>
 
@@ -217,12 +234,12 @@ export default function ProductDetail({ product, related = [] }) {
               {product.keySpecs?.map((spec) => (
                 <div
                   key={spec.label}
-                  className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3"
+                  className="rounded-xl border border-white/30 bg-white/20 px-4 py-3 shadow-md backdrop-blur-xl"
                 >
-                  <p className="text-[11px] uppercase tracking-wide text-paper/45">
+                  <p className="text-[11px] uppercase tracking-wide text-black/45">
                     {spec.label}
                   </p>
-                  <p className="mt-1 text-sm font-semibold text-paper">
+                  <p className="mt-1 text-sm font-semibold text-black">
                     {spec.value}
                   </p>
                 </div>
@@ -235,7 +252,7 @@ export default function ProductDetail({ product, related = [] }) {
                 {product.badges.map((badge) => (
                   <li
                     key={badge}
-                    className="flex items-center gap-1.5 text-sm text-paper/70"
+                    className="flex items-center gap-1.5 text-sm text-black/70 font-semibold"
                   >
                     <CheckCircle2 size={15} className="text-[#C79A5C]" />
                     {badge}
@@ -255,7 +272,7 @@ export default function ProductDetail({ product, related = [] }) {
               </Link>
               <a
                 href="#specifications"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-paper transition-colors hover:border-[#C79A5C] hover:text-[#C79A5C]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-black/20 bg-white/20 px-6 py-3.5 text-sm font-semibold text-black backdrop-blur-md transition-colors hover:border-[#C79A5C] hover:text-[#C79A5C]"
               >
                 <FileDown size={16} />
                 View spec sheet
@@ -263,28 +280,28 @@ export default function ProductDetail({ product, related = [] }) {
             </div>
 
             {/* Quick trust row */}
-            <div className="mt-8 grid grid-cols-1 gap-4 border-t border-hairline pt-6 sm:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-4 border-t border-black/10 pt-6 sm:grid-cols-3 rounded-2xl border border-white/30 bg-white/20 p-4 shadow-md backdrop-blur-xl">
               <div className="flex items-start gap-2.5">
                 <ShieldCheck size={18} className="mt-0.5 shrink-0 text-[#C79A5C]" />
                 <div>
-                  <p className="text-sm font-medium text-paper">Quality checked</p>
-                  <p className="text-xs text-paper/50">On every incoming batch</p>
+                  <p className="text-sm font-medium text-black">Quality checked</p>
+                  <p className="text-xs text-black/50">On every incoming batch</p>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
                 <Truck size={18} className="mt-0.5 shrink-0 text-[#C79A5C]" />
                 <div>
-                  <p className="text-sm font-medium text-paper">Pan-India delivery</p>
-                  <p className="text-xs text-paper/50">From 4 regional offices</p>
+                  <p className="text-sm font-medium text-black">Pan-India delivery</p>
+                  <p className="text-xs text-black/50">From 4 regional offices</p>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
                 <Package size={18} className="mt-0.5 shrink-0 text-[#C79A5C]" />
                 <div>
-                  <p className="text-sm font-medium text-paper">
+                  <p className="text-sm font-medium text-black">
                     {product.packaging?.[0]?.value || "Flexible packaging"}
                   </p>
-                  <p className="text-xs text-paper/50">Bulk options available</p>
+                  <p className="text-xs text-black/50">Bulk options available</p>
                 </div>
               </div>
             </div>
@@ -293,7 +310,7 @@ export default function ProductDetail({ product, related = [] }) {
       </section>
 
       {/* ===================== Description ===================== */}
-      <section className="border-t border-hairline py-16 sm:py-20">
+      <section className="border-t border-black/10 py-16 sm:py-20">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 lg:grid-cols-[1.1fr,0.9fr] lg:gap-16">
           <motion.div
             initial="hidden"
@@ -301,17 +318,17 @@ export default function ProductDetail({ product, related = [] }) {
             viewport={{ once: true, margin: "-80px" }}
             variants={fadeUp}
           >
-            <span className="text-[11px] tracking-wide text-[#C79A5C]">
+            <span className="text-[11px] tracking-wide text-[#C79A5C] font-semibold">
               Overview
             </span>
-            <h2 className="mt-2 text-2xl font-semibold text-paper sm:text-3xl">
+            <h2 className="mt-2 text-2xl font-semibold text-black sm:text-3xl">
               About this material
             </h2>
             <div className="mt-5 space-y-4">
               {product.description?.map((para, i) => (
                 <p
                   key={i}
-                  className="max-w-prose text-[1.02rem] leading-relaxed text-paper/70"
+                  className="max-w-prose text-[1.02rem] leading-relaxed text-black/70 font-semibold"
                 >
                   {para}
                 </p>
@@ -327,7 +344,7 @@ export default function ProductDetail({ product, related = [] }) {
             variants={fadeUp}
             transition={{ delay: 0.08 }}
           >
-            <div className="mb-4 flex items-center gap-2 text-paper/80">
+            <div className="mb-4 flex items-center gap-2 text-black/80">
               <Boxes size={18} className="text-[#C79A5C]" />
               <h3 className="text-sm font-semibold uppercase tracking-wide">
                 Applications
@@ -337,12 +354,12 @@ export default function ProductDetail({ product, related = [] }) {
               {product.applications?.map((app) => (
                 <div
                   key={app.title}
-                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-4"
+                  className="rounded-2xl border border-white/30 bg-white/20 p-4 shadow-md backdrop-blur-xl"
                 >
-                  <p className="text-sm font-semibold text-paper">
+                  <p className="text-sm font-semibold text-black">
                     {app.title}
                   </p>
-                  <p className="mt-1 text-xs leading-relaxed text-paper/55">
+                  <p className="mt-1 text-xs leading-relaxed text-black/55 font-semibold">
                     {app.description}
                   </p>
                 </div>
@@ -355,7 +372,7 @@ export default function ProductDetail({ product, related = [] }) {
       {/* ===================== Specifications + Packaging ===================== */}
       <section
         id="specifications"
-        className="border-t border-hairline py-16 sm:py-20"
+        className="border-t border-black/10 py-16 sm:py-20"
       >
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 lg:grid-cols-2 lg:gap-16">
           <motion.div
@@ -367,7 +384,7 @@ export default function ProductDetail({ product, related = [] }) {
             <span className="text-[11px] tracking-wide text-[#C79A5C]">
               Technical data
             </span>
-            <h2 className="mt-2 mb-5 text-2xl font-semibold text-paper sm:text-3xl">
+            <h2 className="mt-2 mb-5 text-2xl font-semibold text-black sm:text-3xl">
               Specifications
             </h2>
             <SpecTable specifications={product.specifications} />
@@ -383,13 +400,13 @@ export default function ProductDetail({ product, related = [] }) {
             <span className="text-[11px] tracking-wide text-[#C79A5C]">
               Logistics
             </span>
-            <h2 className="mt-2 mb-5 text-2xl font-semibold text-paper sm:text-3xl">
+            <h2 className="mt-2 mb-5 text-2xl font-semibold text-black sm:text-3xl">
               Packaging &amp; availability
             </h2>
             <SpecTable specifications={product.packaging} />
 
-            <div className="mt-6 rounded-2xl border border-[#C79A5C]/30 bg-[#C79A5C]/[0.06] p-5">
-              <p className="text-sm leading-relaxed text-paper/80">
+            <div className="mt-6 rounded-2xl border border-[#C79A5C]/40 bg-[#C79A5C]/10 p-5 shadow-md backdrop-blur-xl">
+              <p className="text-sm leading-relaxed text-black/80">
                 Need a custom grade, packaging format, or delivery schedule?
                 Our team quotes against your exact specification.
               </p>
