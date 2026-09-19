@@ -68,8 +68,6 @@ export default function AnimatedTitle({
   const ref = useRef(null);
   const inView = useInView(ref, { once, amount });
 
-  // Multi-line mode: lines = [{ text, color, className }, ...], each
-  // rendered on its own line with a running stagger delay across lines.
   if (lines && lines.length) {
     let wordOffset = 0;
     return (

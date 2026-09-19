@@ -15,7 +15,6 @@ export default function TrustedBy() {
       </p>
 
       <div className="group relative overflow-hidden">
-        {/* Edge fades */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-slate-50 to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-slate-50 to-transparent" />
 

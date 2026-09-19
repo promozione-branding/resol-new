@@ -124,9 +124,6 @@ function StatItem({ item, index }) {
       "
     >
 
-      {/* ======================================================
-          GIANT BACKGROUND NUMBER
-      ====================================================== */}
 
       <motion.div
         initial={{
@@ -165,9 +162,6 @@ function StatItem({ item, index }) {
       </motion.div>
 
 
-      {/* ======================================================
-          TOP META
-      ====================================================== */}
 
       <div
         className="
@@ -213,7 +207,6 @@ function StatItem({ item, index }) {
         </div>
 
 
-        {/* ICON */}
 
         <motion.div
           whileHover={{
@@ -274,7 +267,6 @@ function StatItem({ item, index }) {
         </motion.div>
 
 
-        {/* GOLD UNDERLINE */}
 
         <motion.div
           initial={{
@@ -370,10 +362,6 @@ export default function Counter() {
       "
     >
 
-      {/* ======================================================
-          BACKGROUND GRID
-      ====================================================== */}
-
       <div
         className="
           pointer-events-none
@@ -397,10 +385,6 @@ export default function Counter() {
         }}
       />
 
-
-      {/* ======================================================
-          GOLDEN GLOW
-      ====================================================== */}
 
       <div
         className="
@@ -458,7 +442,6 @@ export default function Counter() {
           "
         >
 
-          {/* LEFT */}
 
           <motion.div
             initial={{
@@ -523,7 +506,6 @@ export default function Counter() {
           </motion.div>
 
 
-          {/* RIGHT */}
 
           <motion.div
             initial={{
@@ -545,7 +527,6 @@ export default function Counter() {
             }}
           >
 
-            {/* REUSABLE TITLE */}
 
             <AnimatedTitle
               text="Numbers That"

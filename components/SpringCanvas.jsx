@@ -89,7 +89,6 @@ export default function SpringCanvas() {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.1;
 
-    // ---- scene / camera -----------------------------------------------
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       40,
@@ -100,7 +99,6 @@ export default function SpringCanvas() {
     camera.position.set(0, 0.3, 9);
     camera.lookAt(0, 0, 0);
 
-    // ---- lighting -------------------------------------------------------
     scene.add(new THREE.AmbientLight(0xffffff, 0.15));
 
     const keyLight = new THREE.PointLight(0xfff4e0, 40, 30);
@@ -115,7 +113,6 @@ export default function SpringCanvas() {
     backLight.position.set(0, -5, -6);
     scene.add(backLight);
 
-    // ---- spring geometry --------------------------------------------------
     const COILS = 46;
     const RADIUS = 1.7;
     const LENGTH = 5.2;
@@ -150,7 +147,6 @@ export default function SpringCanvas() {
     const spring = new THREE.Mesh(tubeGeo, material);
     scene.add(spring);
 
-    // ---- scroll progress -------------------------------------------------
     let targetProgress = 0;
     let currentProgress = 0;
     let frameId = 0;
@@ -176,10 +172,6 @@ export default function SpringCanvas() {
       targetProgress = getScrollProgress();
     };
     window.addEventListener("resize", onResize);
-
-    // How quickly the spring "catches up" to the real scroll position.
-    // Higher = snappier / more tightly coupled to scroll, lower = smoother
-    // trailing motion. 0.12–0.18 reads as tightly-coupled like the reference.
     const SMOOTHING = prefersReducedMotion ? 1 : 0.15;
 
     const animate = () => {

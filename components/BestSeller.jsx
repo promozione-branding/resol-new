@@ -96,7 +96,6 @@ function Card({ product, offset, onFocus }) {
             : "border-white/15 shadow-[0_20px_45px_-18px_rgba(0,0,0,0.5)] cursor-pointer"
         }`}
       >
-        {/* glass sheen */}
         <div
           className="pointer-events-none absolute inset-0 z-10 rounded-[1.75rem]"
           style={{
@@ -182,19 +181,12 @@ export default function ProductCoverflow() {
           </h2>
         </div>
 
-        {/*
-          Card track: no overflow clipping so cards render fully.
-          Buttons are absolute on a full-width element that breaks out of
-          the max-w-7xl container via negative horizontal margins,
-          reaching into the true page gutters on both sides.
-        */}
+     
         <div className="relative">
-          {/* Full-bleed anchor for the nav buttons — sits behind the cards */}
           <div
             className="pointer-events-none absolute inset-y-0 left-0 right-0"
             style={{ marginLeft: "calc(-50vw + 50%)", marginRight: "calc(-50vw + 50%)" }}
           >
-            {/* Left button */}
             <button
               onClick={prev}
               aria-label="Previous product"
@@ -203,7 +195,6 @@ export default function ProductCoverflow() {
               <ChevronLeft size={20} />
             </button>
 
-            {/* Right button */}
             <button
               onClick={next}
               aria-label="Next product"
@@ -213,7 +204,6 @@ export default function ProductCoverflow() {
             </button>
           </div>
 
-          {/* Card track — no clipping, cards render fully */}
           <div className="relative h-[420px]">
             {products.map((product, i) => (
               <Card

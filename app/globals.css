@@ -165,3 +165,22 @@ html {
 .reveal.is-visible {
   animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+
+  .group:hover .arrow-btn {
+    background-color: var(--accent);
+    border-color:     var(--accent);
+    color: white;
+  }
+

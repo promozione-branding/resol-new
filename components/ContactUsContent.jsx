@@ -128,9 +128,6 @@ export default function ContactUs() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#F5F2EA] text-[#17130B]">
-      {/* ======================================================
-          BACKGROUND
-      ====================================================== */}
 
       <div className="pointer-events-none fixed inset-0 z-0">
         <div className="absolute left-[-15%] top-[10%] h-[500px] w-[500px] rounded-full bg-[#D4A017]/[0.07] blur-[150px]" />
@@ -147,14 +144,9 @@ export default function ContactUs() {
         />
       </div>
 
-      {/* ======================================================
-          HERO
-      ====================================================== */}
-
       <section className="relative z-10  px-5 pb-12 pt-28 sm:px-8 md:pt-32 lg:px-12">
         <div className="mx-auto flex  max-w-[1500px] flex-col justify-center">
           <div className="grid items-center gap-14 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
-            {/* LEFT */}
             <motion.div
               initial="hidden"
               animate="visible"
@@ -206,7 +198,6 @@ export default function ContactUs() {
               </motion.div>
             </motion.div>
 
-            {/* RIGHT CONTACT PANEL */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -217,7 +208,6 @@ export default function ContactUs() {
               }}
               className="relative"
             >
-              {/* Decorative number */}
               <div className="absolute -right-2 -top-16 hidden text-[150px] font-bold leading-none tracking-[-0.1em] text-[#17130B]/[0.035] xl:block">
                 01
               </div>
@@ -321,22 +311,16 @@ export default function ContactUs() {
         </div>
       </section>
 
-      {/* ======================================================
-          FORM
-      ====================================================== */}
-
       <section
         id="contact-form"
         className="relative z-10 bg-[#17130B] px-5 py-10 text-white sm:px-8 md:py-15 lg:px-12"
       >
-        {/* Large background word */}
         <div className="pointer-events-none absolute right-[-3%] top-[-20px] select-none text-[20vw] font-bold leading-none tracking-[-0.08em] text-white/[0.025]">
           TALK
         </div>
 
         <div className="relative mx-auto max-w-[1500px]">
           <div className="grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-15">
-            {/* LEFT */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -397,7 +381,6 @@ export default function ContactUs() {
               </motion.div>
             </motion.div>
 
-            {/* FORM */}
             <motion.div
               initial={{ opacity: 0, y: 35 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -500,13 +483,9 @@ export default function ContactUs() {
         </div>
       </section>
 
-      {/* ======================================================
-          OFFICE LOCATIONS
-      ====================================================== */}
 
       <section className="relative z-10 bg-[#F5F2EA] px-5 py-12 sm:px-8 md:py-15 lg:px-12">
         <div className="mx-auto max-w-[1500px]">
-          {/* HEADER */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -538,9 +517,7 @@ export default function ContactUs() {
             </motion.p>
           </motion.div>
 
-          {/* OFFICE SELECTOR + MAP */}
           <div className="grid gap-0 border-y border-[#D8D2C5] lg:grid-cols-[0.8fr_1.2fr]">
-            {/* LEFT LIST */}
             <div className="border-b border-[#D8D2C5] lg:border-b-0 lg:border-r">
               {offices.map((office) => {
                 const active = activeOffice === office.id;
@@ -595,7 +572,6 @@ export default function ContactUs() {
               })}
             </div>
 
-            {/* RIGHT DETAIL */}
             <div className="relative min-h-[500px] bg-[#E9E5DB]">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -606,7 +582,6 @@ export default function ContactUs() {
                   transition={{ duration: 0.35 }}
                   className="h-full"
                 >
-                  {/* MAP */}
                   <div className="relative h-[300px] overflow-hidden md:h-[350px]">
                     <iframe
                       src={selectedOffice.map}
@@ -622,7 +597,6 @@ export default function ContactUs() {
           
                   </div>
 
-                  {/* DETAIL */}
                   <div className="grid gap-7 p-6 md:grid-cols-[1fr_auto] md:p-8">
                     <div>
                       <div className="flex gap-3">
@@ -687,9 +661,6 @@ export default function ContactUs() {
         </div>
       </section>
 
-      {/* ======================================================
-          FINAL CTA
-      ====================================================== */}
 
       <section className="relative z-10 overflow-hidden bg-[#D4A017] px-5 py-13 sm:px-8 md:py-15 lg:px-12">
         <div className="absolute right-[-5%] top-[-70%] h-[700px] w-[700px] rounded-full border border-[#17130B]/10" />

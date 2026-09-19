@@ -157,18 +157,12 @@ export default function Cta() {
   return (
     <main className="relative bg-[#0f0f11]">
 
-      {/* =========================
-          SCROLL CONTAINER
-      ========================= */}
 
       <div
         ref={container}
         className="relative h-[220vh] sm:h-[250vh]"
       >
 
-        {/* =========================
-            STICKY SCREEN
-        ========================= */}
 
         <div
           className="
@@ -185,9 +179,6 @@ export default function Cta() {
           "
         >
 
-          {/* =========================
-              HEADER
-          ========================= */}
 
           <div
             ref={headerText}
@@ -223,9 +214,6 @@ export default function Cta() {
           </div>
 
 
-          {/* =========================
-              RESOL INDUSTRIES MASK
-          ========================= */}
 
           <div
             ref={stickyMask}
@@ -243,9 +231,7 @@ export default function Cta() {
               maskImage: SVG_MASK,
               WebkitMaskImage: SVG_MASK,
 
-              /*
-               * Text ko thoda upar rakha
-               */
+           
 
               maskPosition: "50% 53%",
               WebkitMaskPosition: "50% 53%",
@@ -253,18 +239,12 @@ export default function Cta() {
               maskRepeat: "no-repeat",
               WebkitMaskRepeat: "no-repeat",
 
-              /*
-               * Initial text size smaller
-               */
+           
 
               maskSize: "65%",
               WebkitMaskSize: "65%",
             }}
           >
-
-            {/* =========================
-                VIDEO
-            ========================= */}
 
             <div
               ref={innerMedia}

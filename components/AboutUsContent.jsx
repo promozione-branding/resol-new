@@ -65,7 +65,6 @@ export default function AboutUsContent() {
 
     const ctx = gsap.context(() => {
 
-      // 1. HERO PARALLAX
       gsap.to(heroBgRef.current, {
         y: "30%",
         ease: "none",
@@ -77,7 +76,6 @@ export default function AboutUsContent() {
         }
       });
 
-      // Hero text fades up and slides out
       gsap.to(heroTextRef.current, {
         y: "-25%",
         opacity: 0,
@@ -90,7 +88,6 @@ export default function AboutUsContent() {
         }
       });
 
-      // 2. BOARD GAME PATH REVEAL
       const pathLength = pathRef.current?.getTotalLength?.() || 2000;
       gsap.set(pathRef.current, {
         strokeDasharray: pathLength,
@@ -125,7 +122,6 @@ export default function AboutUsContent() {
         });
       }
 
-      // 3. POP-UP PERKS
       gsap.utils.toArray(".perk-station").forEach((station) => {
         gsap.from(station, {
           scale: 0,
@@ -140,7 +136,6 @@ export default function AboutUsContent() {
         });
       });
 
-      // 4. SECTION REVEALS
       gsap.utils.toArray(".reveal-up").forEach((el) => {
         gsap.from(el, {
           y: 60,

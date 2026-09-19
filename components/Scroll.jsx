@@ -100,13 +100,9 @@ export default function Scroll() {
         }vh`,
       }}
     >
-      {/* =========================================================
-          STICKY AREA
-      ========================================================= */}
 
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
 
-        {/* TOP PROGRESS LINE */}
 
         <div className="absolute left-0 top-0 z-50 h-[3px] w-full bg-black/10">
           <motion.div
@@ -118,7 +114,6 @@ export default function Scroll() {
           />
         </div>
 
-        {/* SMALL SECTION LABEL */}
 
         <div className="absolute left-6 top-7 z-40 flex items-center gap-4 lg:left-12">
           <span className="h-[1px] w-10 bg-black/30" />
@@ -188,9 +183,6 @@ export default function Scroll() {
             </div>
           </div>
 
-          {/* =====================================================
-              CAPABILITY PANELS
-          ====================================================== */}
 
           {capabilities.map((item, index) => (
             <div
@@ -198,13 +190,11 @@ export default function Scroll() {
               className="relative flex h-screen w-[88vw] shrink-0 items-center px-6 md:w-[650px] lg:w-[700px] lg:px-12"
             >
 
-              {/* HUGE NUMBER */}
 
               <div className="pointer-events-none absolute bottom-[-25px] left-0 z-0 font-['Manrope'] text-[270px] font-extrabold leading-none tracking-[-25px] text-black/[0.045] md:text-[360px]">
                 {item.number}
               </div>
 
-              {/* IMAGE */}
 
               <div className="relative z-10 h-[70vh] w-full overflow-hidden">
 
@@ -215,11 +205,9 @@ export default function Scroll() {
                   className="object-cover transition duration-1000 hover:scale-105"
                 />
 
-                {/* IMAGE GRADIENT */}
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
-                {/* TOP LABEL */}
 
                 <div className="absolute left-0 top-0 flex items-center gap-3 bg-[#D4A017] px-5 py-3">
 
@@ -235,7 +223,6 @@ export default function Scroll() {
 
                 </div>
 
-                {/* CONTENT */}
 
                 <div className="absolute bottom-0 left-0 w-full p-7 md:p-10">
 
@@ -257,13 +244,9 @@ export default function Scroll() {
             </div>
           ))}
 
-          {/* =====================================================
-              FINAL CTA
-          ====================================================== */}
 
           <div className="relative flex h-screen w-[90vw] shrink-0 items-center bg-[#D4A017] px-8 md:w-[720px] md:px-16 lg:w-[850px] lg:px-20">
 
-            {/* GIANT NUMBER */}
 
             <div className="pointer-events-none absolute bottom-[-20px] right-[-20px] font-['Manrope'] text-[300px] font-extrabold leading-none tracking-[-30px] text-black/[0.06]">
               06

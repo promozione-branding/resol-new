@@ -77,10 +77,8 @@ function StatCard({ heading, paragraph, image }) {
       whileHover="shine"
       className="group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-white/[0.09] to-white/[0.02] p-8 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25),0_8px_30px_-10px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-colors duration-300 hover:border-white/30 hover:bg-white/[0.07]"
     >
-      {/* soft top sheen */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/15 via-transparent to-transparent" />
 
-      {/* animated light sweep */}
       <motion.div
         aria-hidden
         className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent"

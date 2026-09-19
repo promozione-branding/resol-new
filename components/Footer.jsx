@@ -75,19 +75,12 @@ export default function Footer() {
 
   return (
     <>
-      {/* ========================================================
-          FOOTER
-      ======================================================== */}
 
       <footer className="relative overflow-hidden bg-[#090909] text-white">
 
-        {/* ======================================================
-            BACKGROUND
-        ====================================================== */}
 
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
 
-          {/* LARGE GOLD GLOW */}
 
           <div
             className="
@@ -115,7 +108,6 @@ export default function Footer() {
             "
           />
 
-          {/* LARGE WATERMARK */}
 
           <div
             className="
@@ -135,7 +127,6 @@ export default function Footer() {
             RESOL
           </div>
 
-          {/* TOP LINE */}
 
           <div
             className="
@@ -154,16 +145,10 @@ export default function Footer() {
         </div>
 
 
-        {/* ======================================================
-            MAIN FOOTER CONTENT
-        ====================================================== */}
 
         <div className="relative mx-auto max-w-[1500px] px-5 py-7 sm:px-8 md:py-8 lg:px-12 xl:px-16">
 
 
-          {/* ====================================================
-              BRAND + CONTACT HEADER
-          ==================================================== */}
 
           <div
             className="
@@ -178,7 +163,6 @@ export default function Footer() {
             "
           >
 
-            {/* BRAND */}
 
             <motion.div
               initial={{
@@ -233,7 +217,6 @@ export default function Footer() {
             </motion.div>
 
 
-            {/* SOCIAL */}
 
             <div>
 
@@ -284,16 +267,10 @@ export default function Footer() {
           </div>
 
 
-          {/* ====================================================
-              MAIN GRID
-          ==================================================== */}
 
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-10">
 
 
-            {/* ==================================================
-                OFFICES
-            ================================================== */}
 
             <motion.div
               initial={{
@@ -313,7 +290,6 @@ export default function Footer() {
               className="lg:col-span-8"
             >
 
-              {/* SECTION TITLE */}
 
               <div className="mb-3 flex items-end justify-between">
 
@@ -356,7 +332,6 @@ export default function Footer() {
               </div>
 
 
-              {/* OFFICE LIST */}
 
               <div className="border-t border-white/[0.10]">
 
@@ -394,7 +369,6 @@ export default function Footer() {
                     "
                   >
 
-                    {/* GOLD LINE */}
 
                     <span
                       className="
@@ -413,7 +387,6 @@ export default function Footer() {
                     />
 
 
-                    {/* NUMBER */}
 
                     <div
                       className="
@@ -428,7 +401,6 @@ export default function Footer() {
                     </div>
 
 
-                    {/* CITY */}
 
                     <div>
 
@@ -459,7 +431,6 @@ export default function Footer() {
                     </div>
 
 
-                    {/* ADDRESS */}
 
                     <p
                       className="
@@ -485,9 +456,6 @@ export default function Footer() {
             </motion.div>
 
 
-            {/* ==================================================
-                CONTACT
-            ================================================== */}
 
             <motion.div
               initial={{
@@ -518,7 +486,6 @@ export default function Footer() {
                 "
               >
 
-                {/* TITLE */}
 
                 <div className="mb-8">
 
@@ -552,7 +519,6 @@ export default function Footer() {
                 </div>
 
 
-                {/* PHONE */}
 
                 <ContactBlock
                   icon={<FaPhone size={12} />}
@@ -576,7 +542,6 @@ export default function Footer() {
                 </ContactBlock>
 
 
-                {/* MOBILE */}
 
                 <ContactBlock
                   icon={<FaPhone size={12} />}
@@ -607,7 +572,6 @@ export default function Footer() {
                 </ContactBlock>
 
 
-                {/* EMAIL */}
 
                 <ContactBlock
                   icon={<FaEnvelope size={12} />}
@@ -624,7 +588,6 @@ export default function Footer() {
                 </ContactBlock>
 
 
-                {/* WHATSAPP */}
 
                 <a
                   href="https://wa.me/919810929486"
@@ -715,9 +678,6 @@ export default function Footer() {
         </div>
 
 
-        {/* ======================================================
-            BOTTOM BAR
-        ====================================================== */}
 
         <div className="relative border-t border-white/[0.08]">
 
@@ -739,7 +699,6 @@ export default function Footer() {
             "
           >
 
-            {/* COPYRIGHT */}
 
             <p
               className="
@@ -753,7 +712,6 @@ export default function Footer() {
             </p>
 
 
-            {/* LINKS */}
 
             <div
               className="
@@ -810,9 +768,6 @@ export default function Footer() {
       </footer>
 
 
-      {/* ========================================================
-          BACK TO TOP
-      ======================================================== */}
 
       <motion.button
         initial={{
@@ -916,7 +871,6 @@ function ContactBlock({
       "
     >
 
-      {/* ICON */}
 
       <div
         className="
@@ -935,7 +889,6 @@ function ContactBlock({
       </div>
 
 
-      {/* CONTENT */}
 
       <div>
 

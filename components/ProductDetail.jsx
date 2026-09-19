@@ -191,7 +191,6 @@ export default function ProductDetail({ product, related = [] }) {
     <source src="/powder_animation6.mp4" type="video/mp4" />
   </video>
 
-  {/* Overlay */}
   <div className="absolute inset-0 bg-white/30 backdrop-blur-[4px]" />
 </div>
 
@@ -227,7 +226,6 @@ export default function ProductDetail({ product, related = [] }) {
               {product.tagline}
             </p>
 
-            {/* Key spec pills */}
             <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
               {product.keySpecs?.map((spec) => (
                 <div
@@ -244,7 +242,6 @@ export default function ProductDetail({ product, related = [] }) {
               ))}
             </div>
 
-            {/* Badges */}
             {product.badges?.length > 0 && (
               <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
                 {product.badges.map((badge) => (
@@ -259,7 +256,6 @@ export default function ProductDetail({ product, related = [] }) {
               </ul>
             )}
 
-            {/* CTAs */}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href={`/contact?product=${encodeURIComponent(product.name)}`}
@@ -277,7 +273,6 @@ export default function ProductDetail({ product, related = [] }) {
               </a>
             </div>
 
-            {/* Quick trust row */}
             <div className="mt-8 grid grid-cols-1 gap-4 border-t border-black/10 pt-6 sm:grid-cols-3 rounded-2xl border border-white/30 bg-white/20 p-4 shadow-md backdrop-blur-xl">
               <div className="flex items-start gap-2.5">
                 <ShieldCheck size={18} className="mt-0.5 shrink-0 text-[#C79A5C]" />
@@ -307,7 +302,6 @@ export default function ProductDetail({ product, related = [] }) {
         </div>
       </section>
 
-      {/* ===================== Description ===================== */}
       <section className="border-t border-black/10 py-16 sm:py-20">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 lg:grid-cols-[1.1fr,0.9fr] lg:gap-16">
           <motion.div
@@ -334,7 +328,6 @@ export default function ProductDetail({ product, related = [] }) {
             </div>
           </motion.div>
 
-          {/* Applications */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -367,7 +360,6 @@ export default function ProductDetail({ product, related = [] }) {
         </div>
       </section>
 
-      {/* ===================== Specifications + Packaging ===================== */}
       <section
         id="specifications"
         className="border-t border-black/10 py-16 sm:py-20"

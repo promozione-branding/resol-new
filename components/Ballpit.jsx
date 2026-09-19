@@ -33,9 +33,6 @@ class x {
   onAfterResize = () => {};
   #s = false;
   #n = false;
-  // Bind once: `.bind()` returns a new function on every call, so binding again
-  // in the teardown would hand removeEventListener a function that was never
-  // registered, leaving the listener attached for the lifetime of the page.
   #boundResize = this.#f.bind(this);
   #boundVisibilityChange = this.#v.bind(this);
   isDisposed = false;
@@ -73,7 +70,6 @@ class x {
 
   const e = {
     canvas: this.canvas,
-    // Prefer default – high-performance often causes context creation failures
     powerPreference: 'default',
     antialias: true,
     alpha: true,
@@ -84,7 +80,6 @@ class x {
     this.renderer = new s(e);
   } catch (err) {
     console.warn('WebGLRenderer failed, retrying with minimal options', err);
-    // Fallback without powerPreference / antialias
     this.renderer = new s({
       canvas: this.canvas,
       alpha: true
@@ -758,7 +753,6 @@ const Ballpit = ({ className = '', followCursor = true, ...props }) => {
     let cancelled = false;
     let instance = null;
 
-    // Small delay helps when Strict Mode immediately disposes then remounts
     const id = requestAnimationFrame(() => {
       if (cancelled) return;
       instance = createBallpit(canvas, { followCursor, ...props });
@@ -772,12 +766,10 @@ const Ballpit = ({ className = '', followCursor = true, ...props }) => {
         spheresInstanceRef.current.dispose();
         spheresInstanceRef.current = null;
       }
-      // Also clear any instance created in this effect cycle
       if (instance && instance !== spheresInstanceRef.current) {
         instance.dispose();
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

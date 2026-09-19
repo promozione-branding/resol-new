@@ -87,7 +87,6 @@ function AboutSection({ section }) {
         overflow: "hidden",
       }}
     >
-      {/* ── BALL LAYER ── anchored to the <section>, bypasses max-w-7xl entirely */}
       <div
         aria-hidden="true"
         style={{
@@ -111,7 +110,6 @@ function AboutSection({ section }) {
         />
       </div>
 
-      {/* ── TEXT LAYER ── normal centred container, sits on top */}
       <div
         className="relative max-w-7xl mx-auto py-28 px-10"
         style={{ zIndex: 10 }}

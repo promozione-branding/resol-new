@@ -1,9 +1,3 @@
-// Product catalog data.
-//
-// This is the single source of truth for anything product-related on the
-// site (catalog grid, detail pages, "related products" rails). Swap the
-// image URLs / copy for real CMS data whenever it's available — the shape
-// of each object is what the UI depends on, not the source.
 
 export const products = [
   {
