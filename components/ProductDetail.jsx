@@ -181,17 +181,17 @@ export default function ProductDetail({ product, related = [] }) {
     <main className="relative min-h-screen bg-transparent pt-28 text-black sm:pt-32">
 <div className="pointer-events-none fixed inset-0 -z-20 h-screen w-screen overflow-hidden">
   <video
-    autoPlay
-    muted
-    loop
-    playsInline
-    preload="auto"
-    className="absolute left-1/2 top-1/2 min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 object-cover"
-  >
-    <source src="/powder_animation6.mp4" type="video/mp4" />
-  </video>
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="auto"
+  className="absolute left-1/2 top-1/2 min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 object-cover"
+>
+  <source src="/stock.webm" type="video/webm" />
+</video>
 
-  <div className="absolute inset-0 bg-white/30 backdrop-blur-[4px]" />
+  <div className="absolute inset-0 bg-white/30 backdrop-blur-[6px]" />
 </div>
 
       <section className="mx-auto max-w-7xl px-6 pb-16 sm:pb-20 mt-6">
@@ -215,10 +215,8 @@ export default function ProductDetail({ product, related = [] }) {
             variants={fadeUp}
             transition={{ delay: 0.12 }}
           >
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#C79A5C] font-semibold">
-              {product.category}
-            </p>
-            <h1 className="mt-3 text-3xl font-semibold leading-tight text-black sm:text-4xl">
+            
+            <h1 className=" text-3xl font-semibold leading-tight text-black sm:text-4xl">
               {product.name}
             </h1>
             <p className="mt-1.5 text-sm text-black/50 font-semibold">{product.grade}</p>
