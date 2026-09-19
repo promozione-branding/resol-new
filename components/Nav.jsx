@@ -58,14 +58,18 @@ export default function Nav() {
         <a href="/about" className="transition-colors hover:opacity-70">
           About
         </a>
-        <a href="/contact" className="transition-colors hover:opacity-70">
-          Contact
+       
+         <a href="/products" className="transition-colors hover:opacity-70">
+          Products
         </a>
                 <a href="/articles" className="transition-colors hover:opacity-70">
           Articles
         </a>
                 <a href="/industry" className="transition-colors hover:opacity-70">
           Industry
+        </a>
+         <a href="/contact" className="transition-colors hover:opacity-70">
+          Contact
         </a>
       </nav>
 

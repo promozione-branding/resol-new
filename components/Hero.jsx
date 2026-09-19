@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative mt-10 flex min-h-[calc(100vh-2.5rem)] items-center justify-center overflow-hidden"
+      className="relative mt-10 flex min-h-[calc(100vh-2.5rem)] items-center justify-center"
     >
       <video
         className="absolute inset-0 h-full w-full object-cover"
@@ -15,7 +15,7 @@ export default function Hero() {
       />
 
       <div className="relative z-10 flex flex-col items-center px-6 text-center md:px-12">
-        <h1 className="font-josh text-8xl sm:text-10xl lg:text-15xl font-bold leading-tighter uppercase lg:mt-16 lg:leading-none text-[#ffffff]">
+        <h1 className="font-josh text-8xl sm:text-10xl lg:text-15xl font-bold leading-tighter uppercase lg:mt-16 lg:leading-none text-[#ffffff] reveal" >
           PVC Resin &amp; Calcium Carbonate
         </h1>
         <p className="mb-6 max-w-full text-lg text-white pt-4">

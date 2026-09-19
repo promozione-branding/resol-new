@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import AnimatedTitle from "./AnimatedTitle";
 
 const capabilities = [
   {
@@ -127,7 +128,6 @@ export default function Scroll() {
           </span>
         </div>
 
-        {/* HORIZONTAL CONTENT */}
 
         <motion.div
           ref={containerRef}
@@ -135,17 +135,13 @@ export default function Scroll() {
           className="flex h-full w-max items-center gap-0"
         >
 
-          {/* =====================================================
-              WHY CHOOSE INTRO
-          ====================================================== */}
+
 
           <div className="relative flex h-screen w-[90vw] shrink-0 items-center bg-[#111111] px-8 md:w-[720px] md:px-16 lg:w-[800px] lg:px-20">
 
-            {/* GOLD LINE */}
 
             <div className="absolute left-0 top-0 h-full w-[4px] bg-[#D4A017]" />
 
-            {/* BACKGROUND TEXT */}
 
             <div className="pointer-events-none absolute bottom-[-25px] right-[-20px] font-['Manrope'] text-[260px] font-extrabold leading-none tracking-[-25px] text-white/[0.025]">
               02
@@ -160,18 +156,17 @@ export default function Scroll() {
                   Our Difference
                 </span>
               </div>
-
-              <h2 className="mt-8 font-['Manrope'] text-[54px] font-extrabold leading-[0.98] tracking-[-3px] text-white md:text-[70px]">
-
-                Why
-
-                <br />
-
-                <span className="text-[#D4A017]">
-                  Resol?
-                </span>
-
-              </h2>
+<AnimatedTitle
+          as="h1"
+          text="Why Resol?"
+          color="#ffffff"
+          delay={0.8}
+          duration={0.8}
+          wordDelay={0.08}
+          amount={0.2}
+          className="mt-8 font-['Manrope'] text-[54px] font-extrabold leading-[0.98] tracking-[-3px] text-white md:text-[70px]"
+        />
+              
 
               <p className="mt-9 max-w-[520px] text-[14px] leading-[2] text-white/55 md:text-[16px]">
                 We combine industry experience, trusted international

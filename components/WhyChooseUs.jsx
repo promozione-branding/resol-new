@@ -125,7 +125,8 @@ export default function WhyChooseUs() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-2xl text-center"
         >
-          <h2 className="text-5xl font-semibold text-white md:text-6xl">
+          
+          <h2 className="text-5xl font-semibold text-white md:text-6xl reveal" style={{ animationDelay: "0.15s" }}>
             Categories
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-white/75">

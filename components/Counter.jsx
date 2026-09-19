@@ -245,9 +245,6 @@ function StatItem({ item, index }) {
       </div>
 
 
-      {/* ======================================================
-          NUMBER
-      ====================================================== */}
 
       <div className="relative z-10 mt-12">
 
@@ -304,9 +301,6 @@ function StatItem({ item, index }) {
       </div>
 
 
-      {/* ======================================================
-          TITLE + DESCRIPTION
-      ====================================================== */}
 
       <div className="relative z-10 mt-7">
 
@@ -327,9 +321,6 @@ function StatItem({ item, index }) {
       </div>
 
 
-      {/* ======================================================
-          BOTTOM GOLD LINE
-      ====================================================== */}
 
       <motion.div
         initial={{
@@ -440,9 +431,6 @@ export default function Counter() {
       />
 
 
-      {/* ======================================================
-          CONTAINER
-      ====================================================== */}
 
       <div
         className="
@@ -455,9 +443,6 @@ export default function Counter() {
         "
       >
 
-        {/* ====================================================
-            HEADER
-        ==================================================== */}
 
         <div
           className="
@@ -506,7 +491,7 @@ export default function Counter() {
 
               <span
                 className="
-                  text-[10px]
+                  text-[15px]
                   font-bold
                   uppercase
                   tracking-[4px]
@@ -586,9 +571,6 @@ export default function Counter() {
         </div>
 
 
-        {/* ====================================================
-            STATS
-        ==================================================== */}
 
         <div
           className="

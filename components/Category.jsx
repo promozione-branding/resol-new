@@ -38,10 +38,6 @@ const categories = [
   },
 ];
 
-// One typeface for structure, one for reading — Space Grotesk's squared-off
-// forms read as technical/industrial, Inter stays quiet underneath it.
-const FONT_HEADING = "'Space Grotesk', 'Segoe UI', sans-serif";
-const FONT_BODY = "'Inter', 'Segoe UI', sans-serif";
 
 function CategoryCard({ heading, paragraph, image, index }) {
   return (
@@ -61,13 +57,11 @@ function CategoryCard({ heading, paragraph, image, index }) {
 
       <div className="relative z-10 p-7">
         <h3
-          style={{ fontFamily: FONT_HEADING }}
           className="text-[1.4rem] font-semibold leading-tight tracking-[-0.015em] text-white"
         >
           {heading}
         </h3>
         <p
-          style={{ fontFamily: FONT_BODY }}
           className="mt-3 max-w-[32ch] text-[0.95rem] font-normal leading-relaxed text-white/85"
         >
           {paragraph}
@@ -78,9 +72,7 @@ function CategoryCard({ heading, paragraph, image, index }) {
 }
 
 export default function CategoryGrid() {
-  // Loads the two typefaces once. If your app already ships fonts globally
-  // (e.g. next/font, an index.html <link>), delete this effect and the
-  // FONT_HEADING / FONT_BODY constants above, and wire up real font vars.
+
   useEffect(() => {
     const id = "category-grid-fonts";
     if (document.getElementById(id)) return;
@@ -102,14 +94,11 @@ export default function CategoryGrid() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mb-12 max-w-xl"
         >
-          <h2
-            style={{ fontFamily: FONT_HEADING }}
-            className="entry-title text-4xl sm:text-10xl lg:text-15xl font-bold leading-tighter uppercase lg:leading-none text-ink"
-          >
+          
+          <h2 className="reveal entry-title text-4xl sm:text-10xl lg:text-15xl font-bold leading-tighter uppercase lg:leading-none text-ink" style={{ animationDelay: "0.2s" }}>
             Our Product Categories
           </h2>
           <p
-            style={{ fontFamily: FONT_BODY }}
             className="mt-3 text-[1.05rem] leading-relaxed text-emerald-950/70"
           >
             Explore our wide range of polymer industry products.
